@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title>hexo &amp; github 搭建blog</title>
+    <url>/hhf-ggt/hhf-ggt.github.io/posts/8e280e62/</url>
+    <content><![CDATA[<h1 id="1、安装hexo"><a href="#1、安装hexo" class="headerlink" title="1、安装hexo"></a>1、安装<code>hexo</code></h1><pre class=" language-bash"><code class="language-bash">$ <span class="token function">npm</span> <span class="token function">install</span> hexo-cli -g
+$ hexo init blog
+$ <span class="token function">cd</span> blog
+$ <span class="token function">npm</span> <span class="token function">install</span>
+$ hexo server
+</code></pre>
+<p><a href="https://hexo.io/zh-cn/">hexo官网</a></p>
+<h1 id="2、配置github"><a href="#2、配置github" class="headerlink" title="2、配置github"></a>2、配置github</h1><ul>
+<li>2.1 新建仓库起名为 githubNmae.github.io</li>
+<li>2.2 在设置中找到page、支持访问master分支</li>
+</ul>
+<h1 id="3、安装主题"><a href="#3、安装主题" class="headerlink" title="3、安装主题"></a>3、安装主题</h1><pre class=" language-bash"><code class="language-bash"><span class="token comment" spellcheck="true"># cd到blog目录</span>
+$ <span class="token function">git</span> clone https://github.com/iissnan/hexo-theme-next themes/next
+
+<span class="token comment" spellcheck="true"># 手动安装 hexo-renderer-swig 否则localhost:4000 打开无法渲染页面</span>
+$ <span class="token function">npm</span> <span class="token function">install</span> hexo-renderer-swig
+
+<span class="token comment" spellcheck="true"># 切换next风格 在主题配置文件中找到theme</span>
+
+$ <span class="token function">npm</span> <span class="token function">install</span> hexo-generator-searchdb
+<span class="token comment" spellcheck="true"># 安装本地搜索插件</span>
+
+$ <span class="token function">npm</span> <span class="token function">install</span> hexo-wordcount --save
+<span class="token comment" spellcheck="true"># 安装文章字数统计及阅读时的功能</span>
+
+$ <span class="token function">npm</span> uninstall hexo-generator-index --save
+$ <span class="token function">npm</span> <span class="token function">install</span> hexo-generator-index-pin-top --save
+<span class="token comment" spellcheck="true"># 安装文件制顶功能</span>
+
+<span class="token comment" spellcheck="true"># 链接文章</span>
+$ <span class="token function">npm</span> <span class="token function">install</span> hexo-abbrlink --save
+</code></pre>
+]]></content>
+      <tags>
+        <tag>hexo</tag>
+      </tags>
+  </entry>
+</search>
