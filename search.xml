@@ -2,7 +2,7 @@
 <search>
   <entry>
     <title>hexo &amp; github 搭建blog</title>
-    <url>/hhf-ggt/hhf-ggt.github.io/posts/8e280e62/</url>
+    <url>./posts/8e280e62/</url>
     <content><![CDATA[<h1 id="1、安装hexo"><a href="#1、安装hexo" class="headerlink" title="1、安装hexo"></a>1、安装<code>hexo</code></h1><pre class=" language-bash"><code class="language-bash">$ <span class="token function">npm</span> <span class="token function">install</span> hexo-cli -g
 $ hexo init blog
 $ <span class="token function">cd</span> blog

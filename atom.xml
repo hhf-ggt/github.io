@@ -3,11 +3,11 @@
   <title>xiaolaohu</title>
   
   <subtitle> </subtitle>
-  <link href="https://github.com/hhf-ggt/hhf-ggt.github.io/atom.xml" rel="self"/>
+  <link href="http://example.com/atom.xml" rel="self"/>
   
-  <link href="https://github.com/hhf-ggt/hhf-ggt.github.io/"/>
+  <link href="http://example.com/"/>
   <updated>2021-12-06T14:38:21.533Z</updated>
-  <id>https://github.com/hhf-ggt/hhf-ggt.github.io/</id>
+  <id>http://example.com/</id>
   
   <author>
     <name>huhu</name>
@@ -18,8 +18,8 @@
   
   <entry>
     <title>hexo &amp; github 搭建blog</title>
-    <link href="https://github.com/hhf-ggt/hhf-ggt.github.io/posts/8e280e62/"/>
-    <id>https://github.com/hhf-ggt/hhf-ggt.github.io/posts/8e280e62/</id>
+    <link href="http://example.com/posts/8e280e62/"/>
+    <id>http://example.com/posts/8e280e62/</id>
     <published>2021-12-06T04:28:26.000Z</published>
     <updated>2021-12-06T14:38:21.533Z</updated>
     
@@ -35,7 +35,7 @@
     
     
     
-    <category term="hexo" scheme="https://github.com/hhf-ggt/hhf-ggt.github.io/tags/hexo/"/>
+    <category term="hexo" scheme="http://example.com/tags/hexo/"/>
     
   </entry>
   
