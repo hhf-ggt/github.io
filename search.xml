@@ -50,6 +50,17 @@ $ <span class="token function">npm</span> <span class="token function">install</
       </tags>
   </entry>
   <entry>
+    <title>node</title>
+    <url>/posts/857fe845/</url>
+    <content><![CDATA[<h1 id="我是node"><a href="#我是node" class="headerlink" title="我是node"></a>我是node</h1>]]></content>
+      <categories>
+        <category>node</category>
+      </categories>
+      <tags>
+        <tag>node</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>index.html</title>
     <url>/posts/774be9c9/</url>
     <content><![CDATA[
@@ -80,17 +91,6 @@ $ <span class="token function">npm</span> <span class="token function">install</
       </categories>
       <tags>
         <tag>js</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>node</title>
-    <url>/posts/857fe845/</url>
-    <content><![CDATA[<h1 id="我是node"><a href="#我是node" class="headerlink" title="我是node"></a>我是node</h1>]]></content>
-      <categories>
-        <category>node</category>
-      </categories>
-      <tags>
-        <tag>node</tag>
       </tags>
   </entry>
   <entry>
