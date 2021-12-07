@@ -35,23 +35,18 @@ $ <span class="token function">npm</span> <span class="token function">install</
 <span class="token comment" spellcheck="true"># 链接文章</span>
 $ <span class="token function">npm</span> <span class="token function">install</span> hexo-abbrlink --save
 </code></pre>
+<h1 id="域名购买"><a href="#域名购买" class="headerlink" title="域名购买"></a>域名购买</h1><blockquote>
+<p>阿里云购买域名、绑定自己github仓库</p>
+</blockquote>
+<h1 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h1><blockquote>
+<p>在source目录下创建CNAME文件将域名写进去、防止每次提交代码后域名绑定丢失、页面跳转404</p>
+</blockquote>
 ]]></content>
       <categories>
         <category>blog</category>
       </categories>
       <tags>
         <tag>hexo</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>javascript</title>
-    <url>/posts/84ea90f7/</url>
-    <content><![CDATA[<h1 id="我是js"><a href="#我是js" class="headerlink" title="我是js"></a>我是js</h1>]]></content>
-      <categories>
-        <category>javascript</category>
-      </categories>
-      <tags>
-        <tag>js</tag>
       </tags>
   </entry>
   <entry>
@@ -74,6 +69,28 @@ $ <span class="token function">npm</span> <span class="token function">install</
 </html>]]></content>
       <tags>
         <tag>html</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>javascript</title>
+    <url>/posts/84ea90f7/</url>
+    <content><![CDATA[<h1 id="我是js"><a href="#我是js" class="headerlink" title="我是js"></a>我是js</h1>]]></content>
+      <categories>
+        <category>javascript</category>
+      </categories>
+      <tags>
+        <tag>js</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>node</title>
+    <url>/posts/857fe845/</url>
+    <content><![CDATA[<h1 id="我是node"><a href="#我是node" class="headerlink" title="我是node"></a>我是node</h1>]]></content>
+      <categories>
+        <category>node</category>
+      </categories>
+      <tags>
+        <tag>node</tag>
       </tags>
   </entry>
   <entry>
@@ -180,14 +197,14 @@ $ <span class="token function">npm</span> <span class="token function">install</
       </tags>
   </entry>
   <entry>
-    <title>node</title>
-    <url>/posts/857fe845/</url>
-    <content><![CDATA[<h1 id="我是node"><a href="#我是node" class="headerlink" title="我是node"></a>我是node</h1>]]></content>
+    <title>vue</title>
+    <url>/posts/c0add594/</url>
+    <content><![CDATA[<h1 id="我是vue"><a href="#我是vue" class="headerlink" title="我是vue"></a>我是vue</h1>]]></content>
       <categories>
-        <category>node</category>
+        <category>vue</category>
       </categories>
       <tags>
-        <tag>node</tag>
+        <tag>vue</tag>
       </tags>
   </entry>
   <entry>
@@ -199,17 +216,6 @@ $ <span class="token function">npm</span> <span class="token function">install</
       </categories>
       <tags>
         <tag>react</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>vue</title>
-    <url>/posts/c0add594/</url>
-    <content><![CDATA[<h1 id="我是vue"><a href="#我是vue" class="headerlink" title="我是vue"></a>我是vue</h1>]]></content>
-      <categories>
-        <category>vue</category>
-      </categories>
-      <tags>
-        <tag>vue</tag>
       </tags>
   </entry>
 </search>
