@@ -1,151 +1,215 @@
 <?xml version="1.0" encoding="utf-8"?>
-<search> 
-  
-  
-    
-    <entry>
-      <title>npm</title>
-      <link href="/posts/1661a9ac/"/>
-      <url>/posts/1661a9ac/</url>
-      
-        <content type="html"><![CDATA[<p><a href="https://docs.npmjs.com/about-npm">npm官网</a></p><h3 id="一、npm命令"><a href="#一、npm命令" class="headerlink" title="一、npm命令"></a>一、<code>npm</code>命令</h3><pre class=" language-bash"><code class="language-bash">$ npn <span class="token function">install</span> -g <span class="token function">npm</span><span class="token comment" spellcheck="true"># 安装npm 全局安装 -g 全局安装</span>$ <span class="token function">npm</span> <span class="token function">install</span> -g cnpm --registry<span class="token operator">=</span>https://registry.npmmirror.com<span class="token comment" spellcheck="true"># 设置淘宝镜像、也可以使用nrm来管理</span>$ cnpm <span class="token function">install</span> <span class="token punctuation">[</span>name<span class="token punctuation">]</span>$ <span class="token function">npm</span> <span class="token function">install</span> express <span class="token operator">||</span> xxx<span class="token comment" spellcheck="true"># 安装某一个包</span>$ <span class="token function">npm</span> <span class="token function">install</span> express --save-dev <span class="token operator">||</span> <span class="token function">npm</span> <span class="token function">install</span> express -D<span class="token comment" spellcheck="true"># 安装在devDependencies</span>$ <span class="token function">npm</span> <span class="token function">install</span> express --save <span class="token operator">||</span> <span class="token function">npm</span> <span class="token function">install</span> express -S<span class="token comment" spellcheck="true"># 安装在dependencies</span>$ <span class="token function">npm</span> <span class="token function">install</span> express<span class="token comment" spellcheck="true"># 安装在dependencies</span>$ <span class="token function">npm</span> uninstall express<span class="token comment" spellcheck="true"># 卸载包express</span>$ <span class="token function">npm</span> -v<span class="token comment" spellcheck="true"># 查看npm 版本</span>$ <span class="token function">npm</span> <span class="token function">install</span> <span class="token operator">||</span> <span class="token function">npm</span> i<span class="token comment" spellcheck="true"># 安装依赖</span>$ <span class="token function">npm</span> init --yes<span class="token comment" spellcheck="true"># 创建package.json文件、跳过提问</span>$ <span class="token function">npm</span> i<span class="token comment" spellcheck="true"># 生成包管理文件package.json、有问答环节</span>$ <span class="token function">npm</span> view @xxx<span class="token comment" spellcheck="true"># 查看某一个包的最新版本</span>$ <span class="token function">npm</span> list -g<span class="token comment" spellcheck="true"># 查看全局安装的</span>$ <span class="token function">npm</span> <span class="token function">ls</span><span class="token comment" spellcheck="true"># 卸载后，你可以到 /node_modules/ 目录下查看包是否还存在</span>$ <span class="token function">npm</span> update express<span class="token comment" spellcheck="true"># 更新模块</span>$ <span class="token function">npm</span> search express<span class="token comment" spellcheck="true"># 搜索模块</span>$ <span class="token function">npm</span> publish<span class="token comment" spellcheck="true"># 发布模块</span>$ <span class="token function">npm</span> <span class="token function">help</span><span class="token comment" spellcheck="true"># 查看命令</span>$ <span class="token function">npm</span> cache <span class="token function">clear</span><span class="token comment" spellcheck="true"># 清空本地缓存</span>$ <span class="token function">npm</span> update xxx<span class="token comment" spellcheck="true"># 更新最新版本</span></code></pre><h3 id="二、本地安装"><a href="#二、本地安装" class="headerlink" title="二、本地安装"></a>二、本地安装</h3><blockquote><p>安装在项目根目录下的node_modules中</p></blockquote><h3 id="三、全局安装"><a href="#三、全局安装" class="headerlink" title="三、全局安装"></a>三、全局安装</h3><blockquote><p>安装在/usr/local或者你的node的安装目录下</p></blockquote><h3 id="四、npm版本号管理"><a href="#四、npm版本号管理" class="headerlink" title="四、npm版本号管理"></a>四、<code>npm</code>版本号管理</h3><pre class=" language-text"><code class="language-text">语义版本号分为X.Y.Z三位，分别代表主版本号、次版本号和补丁版本号。当代码变更时，版本号按以下原则更新。</code></pre><ul><li>如果只是修复bug，需要更新Z位。</li><li>如果是新增了功能，但是向下兼容，需要更新Y位。</li><li>如果有大变动，向下不兼容，需要更新X位。</li></ul><ol><li>~会匹配最近的小版本依赖包，比如~1.2.3会匹配所有1.2.x版本，但是不包括1.3.0</li><li>^会匹配最新的大版本依赖包，比如^1.2.3会匹配所有1.x.x的包，包括1.3.0，但是不包括2.0.0</li><li>什么都没有就是固定版本号</li></ol><h3 id="五、yarn"><a href="#五、yarn" class="headerlink" title="五、yarn"></a>五、<code>yarn</code></h3><blockquote><p>yarn和npm 同样的作用、但是yarn比npm安装快速、因为yarn是并行安装并且内部不是层级关系</p></blockquote><h3 id="六、pnpm"><a href="#六、pnpm" class="headerlink" title="六、pnpm"></a>六、<code>pnpm</code></h3><blockquote><p>pnpm是可以将我们本地所有项目中公用的包给提取出去、同样的包如果版本相同的情况下只需要安装一次即可</p></blockquote><h3 id="七、问题记录"><a href="#七、问题记录" class="headerlink" title="七、问题记录"></a>七、问题记录</h3><h4 id="问题1"><a href="#问题1" class="headerlink" title="问题1"></a>问题1</h4><pre class=" language-text"><code class="language-text">  npm ERR! code EINTEGRITY  npm ERR! sha512-MKiLiV+I1AA596t9w1sQJ8jkiSr5+ZKi0WKrYGUn6d1Fx+Ij4tIj+m2WMQSGczs5jZVxV339chE8iwk6F64wjA== integrity checksum failed when using sha512: wanted sha512-MKiLiV+I1AA596t9w1sQJ8jkiSr5+ZKi0WKrYGUn6d1Fx+Ij4tIj+m2WMQSGczs5jZVxV339chE8iwk6F64wjA== but got sha512-WXI95kpJrxw4Nnx8vVI90PuUhrQjnNgghBl5tn54rUNKZYbxv+4ACxUzPVpJEtWxKmeDwnQrzjc0C2bYmRJVKg==. (65117 bytes)</code></pre><h4 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h4><pre class=" language-bash"><code class="language-bash">$ delete package.lock.json$ <span class="token function">npm</span> <span class="token function">install</span> --legacy-peer-deps<span class="token comment" spellcheck="true"># 解决 --legacy-peer-deps标志是在v7中引入的，目的是绕过peerDependency自动安装；它告诉 NPM 忽略项目中引入的各个modules之间的相同modules但不同版本的问题并继续安装，保证各个引入的依赖之间对自身所使用的不同版本modules共存。</span></code></pre>]]></content>
-      
-      
-      
-        <tags>
-            
-            <tag> npm </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>react</title>
-      <link href="/posts/19656fd5/"/>
-      <url>/posts/19656fd5/</url>
-      
-        <content type="html"><![CDATA[<h1 id="react"><a href="#react" class="headerlink" title="react"></a>react</h1>]]></content>
-      
-      
+<search>
+  <entry>
+    <title>index.html</title>
+    <url>/posts/774be9c9/</url>
+    <content><![CDATA[
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <h1>
+    hello html
+  </h1>
+</body>
+</html>]]></content>
+      <tags>
+        <tag>html</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>hexo &amp; github 搭建blog</title>
+    <url>/posts/8e280e62/</url>
+    <content><![CDATA[<h1 id="1、安装hexo"><a href="#1、安装hexo" class="headerlink" title="1、安装hexo"></a>1、安装<code>hexo</code></h1><pre class=" language-bash"><code class="language-bash">$ <span class="token function">npm</span> <span class="token function">install</span> hexo-cli -g
+$ hexo init blog
+$ <span class="token function">cd</span> blog
+$ <span class="token function">npm</span> <span class="token function">install</span>
+$ hexo server
+</code></pre>
+<p><a href="https://hexo.io/zh-cn/">hexo官网</a></p>
+<h1 id="2、配置github"><a href="#2、配置github" class="headerlink" title="2、配置github"></a>2、配置github</h1><ul>
+<li>2.1 新建仓库起名为 githubNmae.github.io</li>
+<li>2.2 在设置中找到page、支持访问master分支</li>
+</ul>
+<h1 id="3、安装主题"><a href="#3、安装主题" class="headerlink" title="3、安装主题"></a>3、安装主题</h1><pre class=" language-bash"><code class="language-bash"><span class="token comment" spellcheck="true"># cd到blog目录</span>
+$ <span class="token function">git</span> clone https://github.com/iissnan/hexo-theme-next themes/next
+
+<span class="token comment" spellcheck="true"># 手动安装 hexo-renderer-swig 否则localhost:4000 打开无法渲染页面</span>
+$ <span class="token function">npm</span> <span class="token function">install</span> hexo-renderer-swig
+
+<span class="token comment" spellcheck="true"># 切换next风格 在主题配置文件中找到theme</span>
+
+$ <span class="token function">npm</span> <span class="token function">install</span> hexo-generator-searchdb
+<span class="token comment" spellcheck="true"># 安装本地搜索插件</span>
+
+$ <span class="token function">npm</span> <span class="token function">install</span> hexo-wordcount --save
+<span class="token comment" spellcheck="true"># 安装文章字数统计及阅读时的功能</span>
+
+$ <span class="token function">npm</span> uninstall hexo-generator-index --save
+$ <span class="token function">npm</span> <span class="token function">install</span> hexo-generator-index-pin-top --save
+<span class="token comment" spellcheck="true"># 安装文件制顶功能</span>
+
+<span class="token comment" spellcheck="true"># 链接文章</span>
+$ <span class="token function">npm</span> <span class="token function">install</span> hexo-abbrlink --save
+</code></pre>
+]]></content>
       <categories>
-          
-          <category> react </category>
-          
+        <category>blog</category>
       </categories>
-      
-      
-        <tags>
-            
-            <tag> react </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>vue</title>
-      <link href="/posts/c0add594/"/>
-      <url>/posts/c0add594/</url>
-      
-        <content type="html"><![CDATA[<h1 id="我是vue"><a href="#我是vue" class="headerlink" title="我是vue"></a>我是vue</h1>]]></content>
-      
-      
+      <tags>
+        <tag>hexo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>javascript</title>
+    <url>/posts/84ea90f7/</url>
+    <content><![CDATA[<h1 id="我是js"><a href="#我是js" class="headerlink" title="我是js"></a>我是js</h1>]]></content>
       <categories>
-          
-          <category> vue </category>
-          
+        <category>javascript</category>
       </categories>
-      
-      
-        <tags>
-            
-            <tag> vue </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>node</title>
-      <link href="/posts/857fe845/"/>
-      <url>/posts/857fe845/</url>
-      
-        <content type="html"><![CDATA[<h1 id="我是node"><a href="#我是node" class="headerlink" title="我是node"></a>我是node</h1>]]></content>
-      
-      
+      <tags>
+        <tag>js</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>node</title>
+    <url>/posts/857fe845/</url>
+    <content><![CDATA[<h1 id="我是node"><a href="#我是node" class="headerlink" title="我是node"></a>我是node</h1>]]></content>
       <categories>
-          
-          <category> node </category>
-          
+        <category>node</category>
       </categories>
-      
-      
-        <tags>
-            
-            <tag> node </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>javascript</title>
-      <link href="/posts/84ea90f7/"/>
-      <url>/posts/84ea90f7/</url>
-      
-        <content type="html"><![CDATA[<h1 id="我是js"><a href="#我是js" class="headerlink" title="我是js"></a>我是js</h1>]]></content>
-      
-      
+      <tags>
+        <tag>node</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>npm</title>
+    <url>/posts/1661a9ac/</url>
+    <content><![CDATA[<p><a href="https://docs.npmjs.com/about-npm">npm官网</a></p>
+<h3 id="一、npm命令"><a href="#一、npm命令" class="headerlink" title="一、npm命令"></a>一、<code>npm</code>命令</h3><pre class=" language-bash"><code class="language-bash">$ npn <span class="token function">install</span> -g <span class="token function">npm</span>
+<span class="token comment" spellcheck="true"># 安装npm 全局安装 -g 全局安装</span>
+
+$ <span class="token function">npm</span> <span class="token function">install</span> -g cnpm --registry<span class="token operator">=</span>https://registry.npmmirror.com
+<span class="token comment" spellcheck="true"># 设置淘宝镜像、也可以使用nrm来管理</span>
+
+$ cnpm <span class="token function">install</span> <span class="token punctuation">[</span>name<span class="token punctuation">]</span>
+
+$ <span class="token function">npm</span> <span class="token function">install</span> express <span class="token operator">||</span> xxx
+<span class="token comment" spellcheck="true"># 安装某一个包</span>
+
+$ <span class="token function">npm</span> <span class="token function">install</span> express --save-dev <span class="token operator">||</span> <span class="token function">npm</span> <span class="token function">install</span> express -D
+<span class="token comment" spellcheck="true"># 安装在devDependencies</span>
+
+$ <span class="token function">npm</span> <span class="token function">install</span> express --save <span class="token operator">||</span> <span class="token function">npm</span> <span class="token function">install</span> express -S
+<span class="token comment" spellcheck="true"># 安装在dependencies</span>
+
+$ <span class="token function">npm</span> <span class="token function">install</span> express
+<span class="token comment" spellcheck="true"># 安装在dependencies</span>
+
+$ <span class="token function">npm</span> uninstall express
+<span class="token comment" spellcheck="true"># 卸载包express</span>
+
+$ <span class="token function">npm</span> -v
+<span class="token comment" spellcheck="true"># 查看npm 版本</span>
+
+$ <span class="token function">npm</span> <span class="token function">install</span> <span class="token operator">||</span> <span class="token function">npm</span> i
+<span class="token comment" spellcheck="true"># 安装依赖</span>
+
+$ <span class="token function">npm</span> init --yes
+<span class="token comment" spellcheck="true"># 创建package.json文件、跳过提问</span>
+
+$ <span class="token function">npm</span> i
+<span class="token comment" spellcheck="true"># 生成包管理文件package.json、有问答环节</span>
+
+$ <span class="token function">npm</span> view @xxx
+<span class="token comment" spellcheck="true"># 查看某一个包的最新版本</span>
+
+$ <span class="token function">npm</span> list -g
+<span class="token comment" spellcheck="true"># 查看全局安装的</span>
+
+$ <span class="token function">npm</span> <span class="token function">ls</span>
+<span class="token comment" spellcheck="true"># 卸载后，你可以到 /node_modules/ 目录下查看包是否还存在</span>
+
+$ <span class="token function">npm</span> update express
+<span class="token comment" spellcheck="true"># 更新模块</span>
+
+$ <span class="token function">npm</span> search express
+<span class="token comment" spellcheck="true"># 搜索模块</span>
+
+$ <span class="token function">npm</span> publish
+<span class="token comment" spellcheck="true"># 发布模块</span>
+
+$ <span class="token function">npm</span> <span class="token function">help</span>
+<span class="token comment" spellcheck="true"># 查看命令</span>
+
+$ <span class="token function">npm</span> cache <span class="token function">clear</span>
+<span class="token comment" spellcheck="true"># 清空本地缓存</span>
+
+$ <span class="token function">npm</span> update xxx
+<span class="token comment" spellcheck="true"># 更新最新版本</span>
+</code></pre>
+<h3 id="二、本地安装"><a href="#二、本地安装" class="headerlink" title="二、本地安装"></a>二、本地安装</h3><blockquote>
+<p>安装在项目根目录下的node_modules中</p>
+</blockquote>
+<h3 id="三、全局安装"><a href="#三、全局安装" class="headerlink" title="三、全局安装"></a>三、全局安装</h3><blockquote>
+<p>安装在/usr/local或者你的node的安装目录下</p>
+</blockquote>
+<h3 id="四、npm版本号管理"><a href="#四、npm版本号管理" class="headerlink" title="四、npm版本号管理"></a>四、<code>npm</code>版本号管理</h3><blockquote>
+<p>语义版本号分为X.Y.Z三位，分别代表主版本号、次版本号和补丁版本号。当代码变更时，版本号按以下原则更新。</p>
+</blockquote>
+<ul>
+<li>如果只是修复bug，需要更新Z位。</li>
+<li>如果是新增了功能，但是向下兼容，需要更新Y位。</li>
+<li>如果有大变动，向下不兼容，需要更新X位。</li>
+</ul>
+<ol>
+<li>~会匹配最近的小版本依赖包，比如~1.2.3会匹配所有1.2.x版本，但是不包括1.3.0</li>
+<li>^会匹配最新的大版本依赖包，比如^1.2.3会匹配所有1.x.x的包，包括1.3.0，但是不包括2.0.0</li>
+<li>什么都没有就是固定版本号</li>
+</ol>
+<h3 id="五、yarn"><a href="#五、yarn" class="headerlink" title="五、yarn"></a>五、<code>yarn</code></h3><blockquote>
+<p>yarn和npm 同样的作用、但是yarn比npm安装快速、因为yarn是并行安装并且内部不是层级关系</p>
+</blockquote>
+<h3 id="六、pnpm"><a href="#六、pnpm" class="headerlink" title="六、pnpm"></a>六、<code>pnpm</code></h3><blockquote>
+<p>pnpm是可以将我们本地所有项目中公用的包给提取出去、同样的包如果版本相同的情况下只需要安装一次即可</p>
+</blockquote>
+<h3 id="七、问题记录"><a href="#七、问题记录" class="headerlink" title="七、问题记录"></a>七、问题记录</h3><h4 id="问题1"><a href="#问题1" class="headerlink" title="问题1"></a>问题1</h4><pre class=" language-text"><code class="language-text">  npm ERR! code EINTEGRITY
+  npm ERR! sha512-MKiLiV+I1AA596t9w1sQJ8jkiSr5+ZKi0WKrYGUn6d1Fx+Ij4tIj+m2WMQSGczs5jZVxV339chE8iwk6F64wjA== integrity checksum failed when using sha512: wanted sha512-MKiLiV+I1AA596t9w1sQJ8jkiSr5+ZKi0WKrYGUn6d1Fx+Ij4tIj+m2WMQSGczs5jZVxV339chE8iwk6F64wjA== but got sha512-WXI95kpJrxw4Nnx8vVI90PuUhrQjnNgghBl5tn54rUNKZYbxv+4ACxUzPVpJEtWxKmeDwnQrzjc0C2bYmRJVKg==. (65117 bytes)
+</code></pre>
+<h4 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h4><pre class=" language-bash"><code class="language-bash">$ delete package.lock.json
+$ <span class="token function">npm</span> <span class="token function">install</span> --legacy-peer-deps
+<span class="token comment" spellcheck="true"># 解决 --legacy-peer-deps标志是在v7中引入的，目的是绕过peerDependency自动安装；它告诉 NPM 忽略项目中引入的各个modules之间的相同modules但不同版本的问题并继续安装，保证各个引入的依赖之间对自身所使用的不同版本modules共存。</span>
+</code></pre>
+]]></content>
+      <tags>
+        <tag>npm</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>react</title>
+    <url>/posts/19656fd5/</url>
+    <content><![CDATA[<h1 id="react"><a href="#react" class="headerlink" title="react"></a>react</h1>]]></content>
       <categories>
-          
-          <category> javascript </category>
-          
+        <category>react</category>
       </categories>
-      
-      
-        <tags>
-            
-            <tag> js </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>hexo &amp; github 搭建blog</title>
-      <link href="/posts/8e280e62/"/>
-      <url>/posts/8e280e62/</url>
-      
-        <content type="html"><![CDATA[<h1 id="1、安装hexo"><a href="#1、安装hexo" class="headerlink" title="1、安装hexo"></a>1、安装<code>hexo</code></h1><pre class=" language-bash"><code class="language-bash">$ <span class="token function">npm</span> <span class="token function">install</span> hexo-cli -g$ hexo init blog$ <span class="token function">cd</span> blog$ <span class="token function">npm</span> <span class="token function">install</span>$ hexo server</code></pre><p><a href="https://hexo.io/zh-cn/">hexo官网</a></p><h1 id="2、配置github"><a href="#2、配置github" class="headerlink" title="2、配置github"></a>2、配置github</h1><ul><li>2.1 新建仓库起名为 githubNmae.github.io</li><li>2.2 在设置中找到page、支持访问master分支</li></ul><h1 id="3、安装主题"><a href="#3、安装主题" class="headerlink" title="3、安装主题"></a>3、安装主题</h1><pre class=" language-bash"><code class="language-bash"><span class="token comment" spellcheck="true"># cd到blog目录</span>$ <span class="token function">git</span> clone https://github.com/iissnan/hexo-theme-next themes/next<span class="token comment" spellcheck="true"># 手动安装 hexo-renderer-swig 否则localhost:4000 打开无法渲染页面</span>$ <span class="token function">npm</span> <span class="token function">install</span> hexo-renderer-swig<span class="token comment" spellcheck="true"># 切换next风格 在主题配置文件中找到theme</span>$ <span class="token function">npm</span> <span class="token function">install</span> hexo-generator-searchdb<span class="token comment" spellcheck="true"># 安装本地搜索插件</span>$ <span class="token function">npm</span> <span class="token function">install</span> hexo-wordcount --save<span class="token comment" spellcheck="true"># 安装文章字数统计及阅读时的功能</span>$ <span class="token function">npm</span> uninstall hexo-generator-index --save$ <span class="token function">npm</span> <span class="token function">install</span> hexo-generator-index-pin-top --save<span class="token comment" spellcheck="true"># 安装文件制顶功能</span><span class="token comment" spellcheck="true"># 链接文章</span>$ <span class="token function">npm</span> <span class="token function">install</span> hexo-abbrlink --save</code></pre>]]></content>
-      
-      
+      <tags>
+        <tag>react</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>vue</title>
+    <url>/posts/c0add594/</url>
+    <content><![CDATA[<h1 id="我是vue"><a href="#我是vue" class="headerlink" title="我是vue"></a>我是vue</h1>]]></content>
       <categories>
-          
-          <category> blog </category>
-          
+        <category>vue</category>
       </categories>
-      
-      
-        <tags>
-            
-            <tag> hexo </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-  
-  
+      <tags>
+        <tag>vue</tag>
+      </tags>
+  </entry>
 </search>
