@@ -1,58 +1,248 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>index.html</title>
-    <url>/posts/774be9c9/</url>
-    <content><![CDATA[
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-</head>
-<body>
-  <h1>
-    hello html
-  </h1>
-</body>
-</html>]]></content>
-      <tags>
-        <tag>html</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>javascript</title>
-    <url>/posts/84ea90f7/</url>
-    <content><![CDATA[<h1 id="我是js"><a href="#我是js" class="headerlink" title="我是js"></a>我是js</h1>]]></content>
-      <categories>
-        <category>javascript</category>
-      </categories>
-      <tags>
-        <tag>js</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>node</title>
-    <url>/posts/857fe845/</url>
-    <content><![CDATA[<h1 id="我是node"><a href="#我是node" class="headerlink" title="我是node"></a>我是node</h1>]]></content>
-      <categories>
-        <category>node</category>
-      </categories>
-      <tags>
-        <tag>node</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>react</title>
-    <url>/posts/19656fd5/</url>
-    <content><![CDATA[<h1 id="react"><a href="#react" class="headerlink" title="react"></a>react</h1>]]></content>
+    <title>css</title>
+    <url>/posts/78cea6d8/</url>
+    <content><![CDATA[<h2 id="1、问题描述"><a href="#1、问题描述" class="headerlink" title="1、问题描述"></a>1、问题描述</h2><p>移动端h5、1px问题、导致边框变粗、设计稿为1px、但是效果图看起来是比1px粗的问题</p>
+<h2 id="2、概念了解"><a href="#2、概念了解" class="headerlink" title="2、概念了解"></a>2、概念了解</h2><h3 id="2-1-物理像素"><a href="#2-1-物理像素" class="headerlink" title="2.1 物理像素"></a>2.1 物理像素</h3><blockquote>
+<p>物理像素又称设备像素、是组成显示屏的基本单位，每一台设备的物理像素在出厂时就已经固定好了，不会改变，我们平时看到的图片是通过每个像素不同颜色组合而成的。设计师一般都是使用物理像素作为单位的</p>
+</blockquote>
+<h3 id="2-2-逻辑像素"><a href="#2-2-逻辑像素" class="headerlink" title="2.2 逻辑像素"></a>2.2 逻辑像素</h3><blockquote>
+<p>逻辑像素又称为设备独立像素或CSS像素，是组成图像的基本单位，它是一个抽象概念，我们可以笼统的认为屏幕可视区域的宽度就是逻辑像素的大小。在1倍屏下，1倍逻辑像素=1倍物理像素；2倍屏下，1倍逻辑像素=2倍物理像素。逻辑像素是可变的，例如当我们放大页面的尺寸比例时，逻辑像素也就随之扩大。</p>
+</blockquote>
+<p><em><strong>前端开发者在CSS中设置的像素就是逻辑像素。</strong></em></p>
+<h3 id="2-3-设备像素比"><a href="#2-3-设备像素比" class="headerlink" title="2.3 设备像素比"></a>2.3 设备像素比</h3><blockquote>
+<p>设备像素比描述的是物理像素和逻辑像素之间的比例关系。可以通过window.devicePixelRatio来获取得到</p>
+</blockquote>
+<h3 id="2-4-PPI"><a href="#2-4-PPI" class="headerlink" title="2.4 PPI"></a>2.4 PPI</h3><blockquote>
+<p>指的是设备每英寸的物理像素点，说的简单点就是一英寸的屏幕中由多少个物理像素组合而成。</p>
+</blockquote>
+<p>我们买手机的时候规格上会写上：</p>
+<pre class=" language-text"><code class="language-text">尺寸：5.5英寸
+分辨率：1920 * 1080 像素
+</code></pre>
+<blockquote>
+<p>这里的1920 * 1080指的是物理像素，就是可视区域内总物理像素的数量，1920代表是长边所占像素大小，1080表示短边所占像素大小。</p>
+</blockquote>
+<h2 id="3、解决方案"><a href="#3、解决方案" class="headerlink" title="3、解决方案"></a>3、解决方案</h2><h3 id="3-1-媒体查询的方式"><a href="#3-1-媒体查询的方式" class="headerlink" title="3.1 媒体查询的方式"></a>3.1 媒体查询的方式</h3><pre class=" language-text"><code class="language-text">.div &#123;
+  border-width: 1px;
+&#125;
+
+/* 两倍像素下 */
+@media screen and (-webkit-min-device-pixel-ratio: 2) &#123;
+  .div &#123;
+    border-width: 0.5px;
+  &#125;
+&#125;
+/* 三倍像素下 */
+@media screen and (-webkit-min-device-pixel-ratio: 3) &#123;
+  .div &#123;
+    border-width: 0.333333px;
+  &#125;
+&#125;
+</code></pre>
+<ul>
+<li>缺点<ul>
+<li>代码量多</li>
+<li>低版本ie不支持</li>
+</ul>
+</li>
+</ul>
+<h3 id="3-2-transform"><a href="#3-2-transform" class="headerlink" title="3.2 transform"></a>3.2 transform</h3><pre class=" language-text"><code class="language-text">@border-color-base : #EBEDF0;
+// 伪元素的位置控制
+.scale-hairline-common(@color, @top, @right, @bottom, @left) &#123;
+  content: '';
+  position: absolute;
+  background-color: @color;
+  display: block;
+  z-index: 1;
+  top: @top;
+  right: @right;
+  bottom: @bottom;
+  left: @left;
+&#125;
+
+//上边框
+.hairline(@direction, @color: @border-color-base) when (@direction = 'top') &#123;
+  border-top: 1PX solid @color;
+
+    @media (min-resolution: 2dppx) &#123;
+      border-top: none;
+
+      &::before &#123;
+        .scale-hairline-common(@color, 0, auto, auto, 0);
+        width: 100%;
+        height: 1PX;
+        transform-origin: 50% 50%;
+        transform: scaleY(0.5);
+
+        @media (min-resolution: 3dppx) &#123;
+          transform: scaleY(0.33);
+        &#125;
+      &#125;
+    &#125;
+&#125;
+
+// 右边框
+.hairline(@direction, @color: @border-color-base) when (@direction = 'right') &#123;
+  border-right: 1PX solid @color;
+
+    @media (min-resolution: 2dppx) &#123;
+      border-right: none;
+
+      &::after &#123;
+        .scale-hairline-common(@color, 0, 0, auto, auto);
+        width: 1PX;
+        height: 100%;
+        background: @color;
+        transform-origin: 100% 50%;
+        transform: scaleX(0.5);
+
+        @media (min-resolution: 3dppx) &#123;
+          transform: scaleX(0.33);
+        &#125;
+      &#125;
+    &#125;
+&#125;
+
+// 下边框
+.hairline(@direction, @color: @border-color-base) when (@direction = 'bottom') &#123;
+  border-bottom: 1PX solid @color;
+
+    @media (min-resolution: 2dppx) &#123;
+      border-bottom: none;
+      &::after &#123;
+        .scale-hairline-common(@color, auto, auto, 0, 0);
+        width: 100%;
+        height: 1PX;
+        transform-origin: 50% 100%;
+        transform: scaleY(0.5);
+        @media (min-resolution: 3dppx) &#123;
+          transform: scaleY(0.33);
+        &#125;
+      &#125;
+    &#125;
+&#125;
+
+// 左边框
+.hairline(@direction, @color: @border-color-base) when (@direction = 'left') &#123;
+  border-left: 1PX solid @color;
+
+    @media (min-resolution: 2dppx) &#123;
+      border-left: none;
+
+      &::before &#123;
+        .scale-hairline-common(@color, 0, auto, auto, 0);
+        width: 1PX;
+        height: 100%;
+        transform-origin: 100% 50%;
+        transform: scaleX(0.5);
+
+        @media (min-resolution: 3dppx) &#123;
+          transform: scaleX(0.33);
+        &#125;
+      &#125;
+    &#125;
+&#125;
+
+// 全边框
+.hairline(@direction, @color: @border-color-base, @radius: 0) when (@direction = 'all') &#123;
+  border: 1PX solid @color;
+  border-radius: @radius;
+
+    @media (min-resolution: 2dppx) &#123;
+      position: relative;
+      border: none;
+
+      &::before &#123;
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 200%;
+        height: 200%;
+        border: 1PX solid @color;
+        border-radius: @radius * 2;
+        transform-origin: 0 0;
+        transform: scale(0.5);
+        box-sizing: border-box;
+        pointer-events: none;
+      &#125;
+    &#125;
+&#125;
+</code></pre>
+<p><em><strong>使用</strong></em></p>
+<pre class=" language-text"><code class="language-text">.div1&#123;
+  .hairline('top',#eeeeee)
+  .hairline('right')
+  .hairline('left',#cccccc)
+&#125;
+.div2&#123;
+  .hairline('all',#bbbbbb,3px)
+&#125;
+</code></pre>
+<ul>
+<li>缺点<ul>
+<li>对于已经使用的伪类(如：clearfix)，可能需要多层嵌套</li>
+</ul>
+</li>
+</ul>
+<h3 id="3-3-box-shadow模拟边框"><a href="#3-3-box-shadow模拟边框" class="headerlink" title="3.3 box-shadow模拟边框"></a>3.3 box-shadow模拟边框</h3><pre class=" language-text"><code class="language-text">.div &#123;
+  box-shadow: inset 0px -1px 1px -1px #c8c7cc;
+&#125;
+</code></pre>
+<ul>
+<li>缺点<ul>
+<li>会有颜色渐变</li>
+</ul>
+</li>
+</ul>
+<h3 id="3-4-border-image的方式"><a href="#3-4-border-image的方式" class="headerlink" title="3.4 border-image的方式"></a>3.4 border-image的方式</h3><pre class=" language-text"><code class="language-text">.background-image-1px &#123;
+  background: url(...) no-repeat left bottom;
+  -webkit-background-size: 100% 1px;
+  background-size: 100% 1px;
+&#125;
+
+.border-bottom-1px &#123;
+  border-width: 0 0 1px 0;
+  -webkit-border-image: url(...) 0 0 2 0 stretch;
+  border-image: url(...) 0 0 2 0 stretch;
+&#125;
+</code></pre>
+<ul>
+<li>缺点<ul>
+<li>我想换个颜色还得换图,而且图片处理圆角会出现模糊的问题</li>
+</ul>
+</li>
+</ul>
+<h2 id="4、Q-amp-A"><a href="#4、Q-amp-A" class="headerlink" title="4、Q&amp;A"></a>4、Q&amp;A</h2><ul>
+<li><p>Q: 上面的解释是真的对吗？</p>
+</li>
+<li><p>A: 如果上面解释的是正确的、那么为什么1px会有问题、其他的不会有问题、比如10px、100px呢？</p>
+</li>
+<li><p>Q: 所以真正的原因是什么呢</p>
+</li>
+<li><p>A:</p>
+<pre class=" language-text"><code class="language-text">我们做移动端页面时一般都会设置meta viewport的content=“width=device-width”，
+这里就是把html视窗宽度大小设置等于设备宽度的大小，大多数手机的屏幕设备宽度都差不多，
+以iphoneX为例，屏幕宽度375px。
+而UI给设计图的时候基本上都是给的二倍图甚至三倍图，假设设计图是750px的二倍图，
+在750px上设计了1px的边框，要拿到375px宽度的手机来显示，就相当于整体设计图缩小一倍，
+所以在375px手机上要以0.5px呈现才符合预期效果，然而css里最低只支持1px大小，不足1px就以1px显示，
+所以你看到的就显得边框较粗，实际上只是设计图整体缩小了，而1px的边框没有跟着缩小导致的。
+（ps：ios较新版已支持0.5px，安卓不支持，这里暂且忽略）
+</code></pre>
+</li>
+</ul>
+<h2 id="5、总结"><a href="#5、总结" class="headerlink" title="5、总结"></a>5、总结</h2><blockquote>
+<p>根本原因就是我们开发和设计所使用的单位是不一致的、设计在二倍屏的情况下设计1px的线或者边框、我们在自己设备上开发的时候并不能支持设计需要的1px效果、所以我们需要支持兼容</p>
+</blockquote>
+]]></content>
       <categories>
         <category>react</category>
       </categories>
       <tags>
-        <tag>react</tag>
+        <tag>css</tag>
       </tags>
   </entry>
   <entry>
@@ -205,17 +395,6 @@ $ <span class="token function">npm</span> <span class="token function">install</
 ]]></content>
       <tags>
         <tag>npm</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>vue</title>
-    <url>/posts/c0add594/</url>
-    <content><![CDATA[<h1 id="我是vue"><a href="#我是vue" class="headerlink" title="我是vue"></a>我是vue</h1>]]></content>
-      <categories>
-        <category>vue</category>
-      </categories>
-      <tags>
-        <tag>vue</tag>
       </tags>
   </entry>
 </search>
