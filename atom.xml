@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2021-12-13T15:44:02.232Z</updated>
+  <updated>2021-12-14T16:20:34.196Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -15,6 +15,56 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>promise实现</title>
+    <link href="http://example.com/posts/8798f7a0/"/>
+    <id>http://example.com/posts/8798f7a0/</id>
+    <published>2021-12-14T13:25:07.000Z</published>
+    <updated>2021-12-14T16:20:34.196Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;promise&quot;&gt;&lt;a href=&quot;#promise&quot; class=&quot;headerlink&quot; title=&quot;promise&quot;&gt;&lt;/a&gt;&lt;code&gt;promise&lt;/code&gt;&lt;/h2&gt;&lt;p&gt;基本概念&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;首先我们来整理一些</summary>
+        
+      
+    
+    
+    
+    <category term="javascript" scheme="http://example.com/categories/javascript/"/>
+    
+    
+    <category term="js" scheme="http://example.com/tags/js/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>手撕相关</title>
+    <link href="http://example.com/posts/99a94cc0/"/>
+    <id>http://example.com/posts/99a94cc0/</id>
+    <published>2021-12-14T13:20:22.000Z</published>
+    <updated>2021-12-14T13:25:28.119Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;一、常见手撕相关的问题总结&quot;&gt;&lt;a href=&quot;#一、常见手撕相关的问题总结&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    
+    <category term="js" scheme="http://example.com/tags/js/"/>
+    
+  </entry>
   
   <entry>
     <title>css</title>

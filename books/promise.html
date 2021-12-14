@@ -4,8 +4,8 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="css, font end develop">
-    <meta name="description" content="css移动端1px问题">
+    <meta name="keywords" content="font end develop">
+    <meta name="description" content="tiaotiaohu">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -17,7 +17,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>css | tiaotiaohu</title>
+    <title>tiaotiaohu</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
@@ -338,12 +338,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/11.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/0.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">css</h1>
+                    <h1 class="description center-align post-title"></h1>
                 </div>
             </div>
         </div>
@@ -457,25 +457,12 @@
             <div class="row tag-cate">
                 <div class="col s7">
                     
-                    <div class="article-tag">
-                        
-                            <a href="/tags/css/">
-                                <span class="chip bg-color">css</span>
-                            </a>
-                        
-                    </div>
+                          <div class="article-tag">
+                            <span class="chip bg-color">无标签</span>
+                          </div>
                     
                 </div>
                 <div class="col s5 right-align">
-                    
-                    <div class="post-cate">
-                        <i class="fas fa-bookmark fa-fw icon-category"></i>
-                        
-                            <a href="/categories/react/" class="post-category">
-                                react
-                            </a>
-                        
-                    </div>
                     
                 </div>
             </div>
@@ -484,7 +471,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2021-12-13
+                    2021-12-15
                 </div>
                 
 
@@ -493,7 +480,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1.4k
+                    2.3k
                 </div>
                 
 
@@ -515,240 +502,187 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="1、问题描述"><a href="#1、问题描述" class="headerlink" title="1、问题描述"></a>1、问题描述</h2><p>移动端h5、1px问题、导致边框变粗、设计稿为1px、但是效果图看起来是比1px粗的问题</p>
-<h2 id="2、概念了解"><a href="#2、概念了解" class="headerlink" title="2、概念了解"></a>2、概念了解</h2><h3 id="2-1-物理像素"><a href="#2-1-物理像素" class="headerlink" title="2.1 物理像素"></a>2.1 物理像素</h3><blockquote>
-<p>物理像素又称设备像素、是组成显示屏的基本单位，每一台设备的物理像素在出厂时就已经固定好了，不会改变，我们平时看到的图片是通过每个像素不同颜色组合而成的。设计师一般都是使用物理像素作为单位的</p>
-</blockquote>
-<h3 id="2-2-逻辑像素"><a href="#2-2-逻辑像素" class="headerlink" title="2.2 逻辑像素"></a>2.2 逻辑像素</h3><blockquote>
-<p>逻辑像素又称为设备独立像素或CSS像素，是组成图像的基本单位，它是一个抽象概念，我们可以笼统的认为屏幕可视区域的宽度就是逻辑像素的大小。在1倍屏下，1倍逻辑像素=1倍物理像素；2倍屏下，1倍逻辑像素=2倍物理像素。逻辑像素是可变的，例如当我们放大页面的尺寸比例时，逻辑像素也就随之扩大。</p>
-</blockquote>
-<p><em><strong>前端开发者在CSS中设置的像素就是逻辑像素。</strong></em></p>
-<h3 id="2-3-设备像素比"><a href="#2-3-设备像素比" class="headerlink" title="2.3 设备像素比"></a>2.3 设备像素比</h3><blockquote>
-<p>设备像素比描述的是物理像素和逻辑像素之间的比例关系。可以通过window.devicePixelRatio来获取得到</p>
-</blockquote>
-<h3 id="2-4-PPI"><a href="#2-4-PPI" class="headerlink" title="2.4 PPI"></a>2.4 PPI</h3><blockquote>
-<p>指的是设备每英寸的物理像素点，说的简单点就是一英寸的屏幕中由多少个物理像素组合而成。</p>
-</blockquote>
-<p>我们买手机的时候规格上会写上：</p>
-<pre class=" language-text"><code class="language-text">尺寸：5.5英寸
-分辨率：1920 * 1080 像素
-</code></pre>
-<blockquote>
-<p>这里的1920 * 1080指的是物理像素，就是可视区域内总物理像素的数量，1920代表是长边所占像素大小，1080表示短边所占像素大小。</p>
-</blockquote>
-<h2 id="3、解决方案"><a href="#3、解决方案" class="headerlink" title="3、解决方案"></a>3、解决方案</h2><h3 id="3-1-媒体查询的方式"><a href="#3-1-媒体查询的方式" class="headerlink" title="3.1 媒体查询的方式"></a>3.1 媒体查询的方式</h3><pre class=" language-text"><code class="language-text">.div {
-  border-width: 1px;
-}
-
-/* 两倍像素下 */
-@media screen and (-webkit-min-device-pixel-ratio: 2) {
-  .div {
-    border-width: 0.5px;
-  }
-}
-/* 三倍像素下 */
-@media screen and (-webkit-min-device-pixel-ratio: 3) {
-  .div {
-    border-width: 0.333333px;
-  }
-}
-</code></pre>
+                <p>/**</p>
 <ul>
-<li>缺点<ul>
-<li>代码量多</li>
-<li>低版本ie不支持</li>
+<li>@description 手动实现一个promiseA+规范的promsie</li>
+<li>@author huhu</li>
+<li>@Date 2021-12-14</li>
+<li>/</li>
 </ul>
-</li>
-</ul>
-<h3 id="3-2-transform"><a href="#3-2-transform" class="headerlink" title="3.2 transform"></a>3.2 transform</h3><pre class=" language-text"><code class="language-text">@border-color-base : #EBEDF0;
-// 伪元素的位置控制
-.scale-hairline-common(@color, @top, @right, @bottom, @left) {
-  content: '';
-  position: absolute;
-  background-color: @color;
-  display: block;
-  z-index: 1;
-  top: @top;
-  right: @right;
-  bottom: @bottom;
-  left: @left;
-}
+<p>// 1、promise是一个类、有状态和值</p>
+<p>const PENDING = ‘PENDING’<br>const REJECTED = ‘REJECTED’<br>const FULFILLED = ‘FULFILLED’</p>
+<p>class myPromise {<br>  constructor(executor) {<br>    // 1、私有属性<br>    this.status = PENDING // promsie的状态值、初始化是pending、并且只能从pending -&gt; rejected || pending -&gt; fulfilled<br>    this.value = undefined // 成功时的值<br>    this.reason = undefined // 失败的原因</p>
+<pre><code>// 定义resolve的回调队列
+this.onResolvedCallbacks = []
+// 定义reject的回调队列
+this.onRejectedCallbacks = []
 
-//上边框
-.hairline(@direction, @color: @border-color-base) when (@direction = 'top') {
-  border-top: 1PX solid @color;
+// 2、定义私有的方法、成功和失败时用来改变status和value||reaso
+let _resolve = (value) =&gt; &#123;
+  if (this.status === PENDING) &#123;
+    this.value = value
+    this.status = FULFILLED
+    // 遍历依次执行所有存放的回调函数
+    this.onResolvedCallbacks.forEach(fn =&gt; fn())
+  &#125;
+&#125;
 
-    @media (min-resolution: 2dppx) {
-      border-top: none;
+let _reject = (reason) =&gt; &#123;
+  if (this.status === PENDING) &#123;
+    this.reason = reason
+    this.status = REJECTED
+    // 同上
+    this.onRejectedCallbacks.forEach(fn =&gt; fn())
+  &#125;
+&#125;
 
-      &::before {
-        .scale-hairline-common(@color, 0, auto, auto, 0);
-        width: 100%;
-        height: 1PX;
-        transform-origin: 50% 50%;
-        transform: scaleY(0.5);
-
-        @media (min-resolution: 3dppx) {
-          transform: scaleY(0.33);
-        }
-      }
-    }
-}
-
-// 右边框
-.hairline(@direction, @color: @border-color-base) when (@direction = 'right') {
-  border-right: 1PX solid @color;
-
-    @media (min-resolution: 2dppx) {
-      border-right: none;
-
-      &::after {
-        .scale-hairline-common(@color, 0, 0, auto, auto);
-        width: 1PX;
-        height: 100%;
-        background: @color;
-        transform-origin: 100% 50%;
-        transform: scaleX(0.5);
-
-        @media (min-resolution: 3dppx) {
-          transform: scaleX(0.33);
-        }
-      }
-    }
-}
-
-// 下边框
-.hairline(@direction, @color: @border-color-base) when (@direction = 'bottom') {
-  border-bottom: 1PX solid @color;
-
-    @media (min-resolution: 2dppx) {
-      border-bottom: none;
-      &::after {
-        .scale-hairline-common(@color, auto, auto, 0, 0);
-        width: 100%;
-        height: 1PX;
-        transform-origin: 50% 100%;
-        transform: scaleY(0.5);
-        @media (min-resolution: 3dppx) {
-          transform: scaleY(0.33);
-        }
-      }
-    }
-}
-
-// 左边框
-.hairline(@direction, @color: @border-color-base) when (@direction = 'left') {
-  border-left: 1PX solid @color;
-
-    @media (min-resolution: 2dppx) {
-      border-left: none;
-
-      &::before {
-        .scale-hairline-common(@color, 0, auto, auto, 0);
-        width: 1PX;
-        height: 100%;
-        transform-origin: 100% 50%;
-        transform: scaleX(0.5);
-
-        @media (min-resolution: 3dppx) {
-          transform: scaleX(0.33);
-        }
-      }
-    }
-}
-
-// 全边框
-.hairline(@direction, @color: @border-color-base, @radius: 0) when (@direction = 'all') {
-  border: 1PX solid @color;
-  border-radius: @radius;
-
-    @media (min-resolution: 2dppx) {
-      position: relative;
-      border: none;
-
-      &::before {
-        content: '';
-        position: absolute;
-        left: 0;
-        top: 0;
-        width: 200%;
-        height: 200%;
-        border: 1PX solid @color;
-        border-radius: @radius * 2;
-        transform-origin: 0 0;
-        transform: scale(0.5);
-        box-sizing: border-box;
-        pointer-events: none;
-      }
-    }
-}
+// 因为构造器是用户传入的、所以我们并不能保证传入的是正确的不会报错
+try &#123;
+  executor(_resolve, _reject)
+&#125; catch(error) &#123;
+  _reject(error)
+&#125;
 </code></pre>
-<p><em><strong>使用</strong></em></p>
-<pre class=" language-text"><code class="language-text">.div1{
-  .hairline('top',#eeeeee)
-  .hairline('right')
-  .hairline('left',#cccccc)
-}
-.div2{
-  .hairline('all',#bbbbbb,3px)
-}
+<p>  }</p>
+<p>  // 实例方法 接受两个参数、一个成功时的回调函数、一个是失败时的回调函数<br>  then(onFulfilled, onRejected) {<br>    // 当状态发生改变的时候 去执行<br>    if (this.status === FULFILLED) {<br>      onFulfilled(this.value)<br>    }<br>    if (this.status === REJECTED) {<br>      onRejected(this.reason)<br>    }<br>    // ** 重点、如果我们的状态还没有发生改变的时候、我们需要将我么你的回调函数存放起来<br>    if (this.status === PENDING) {<br>      this.onResolvedCallbacks.push(() =&gt; {<br>        onFulfilled(this.value)<br>      })</p>
+<pre><code>  this.onRejectedCallbacks.push(() =&gt; &#123;
+    onRejected(this.reason)
+  &#125;)
+&#125;
 </code></pre>
+<p>  }<br>}</p>
+<p>// 测试1</p>
+<p>// 我们需要出传入改变status和value或者reason的方法、以及何时进行更改<br>let p1 = new myPromise((resolve, reject) =&gt; {<br>  // 执行期中的代码会被同步执行掉、不需要等此次事件循环结束后在进行执行<br>  console.log(‘111’)<br>  resolve(‘我是成功后的值’)<br>})</p>
+<p>// 调用then的方法、就是想单于执行回调函数、将我们的值传递给回调函数来执行<br>p1.then((res) =&gt; {<br>  console.log(res) // 我是成功后的值<br>}, (err) =&gt; {<br>  console.log(err)<br>})</p>
+<p>// 问题：上面只能是同步的情况、但是我们日常都是用来处理异步回调</p>
+<p>// 测试2、使用延时计时器来模拟异步 会出现的问题</p>
+<p>let p2 = new myPromise((resolve, reject) =&gt; {<br>  setTimeout(() =&gt; {<br>    resolve(‘我是来模拟异步回调函数’)<br>  }, 2000)<br>  console.log(‘exector 同步执行’) // exector 同步执行<br>})</p>
+<p>p2.then(res =&gt; {<br>  console.log(res) // 空<br>}, err =&gt; {<br>  console.log(err)<br>})</p>
+<p>// 为什么没有打印任何东西呢？</p>
+<p>// 根本原因、就是当我们调用then方法的时候、status并没有发生改变（我们的resolve就是用来改变状态和值）、所以并没有执行到then方法中成功时候的回调函数<br>// 所以我们需要将我们的异步回调存放起来、等待我们的状态发生变化后在进行执行我们的回调</p>
+<p>// 经过我们二次改造后、我们下面来测试一下我们刚才异步出现问题的例子</p>
+<p>// 测试3<br>let p3 = new myPromise((resolve, reject) =&gt; {<br>  setTimeout(() =&gt; {<br>    resolve(‘我是来模拟异步回调函数’)<br>  }, 2000)<br>  console.log(‘exector 同步执行’) // exector 同步执行<br>})</p>
+<p>p3.then(res =&gt; {<br>  console.log(res) // 2s 后打印 ‘我是来模拟异步回调函数’<br>}, err =&gt; {<br>  console.log(err)<br>})</p>
+<p>// 到目前我们已经完成了一个简易版本的promise、等我们写完以后有没有感觉这就是一个发布订阅者模式</p>
+<p>/**</p>
 <ul>
-<li>缺点<ul>
-<li>对于已经使用的伪类(如：clearfix)，可能需要多层嵌套</li>
+<li>接下来我们需要进行promsie最经典的问题</li>
+<li>1、promise的链式调用</li>
+<li>2、值的穿透</li>
+<li>/</li>
 </ul>
-</li>
-</ul>
-<h3 id="3-3-box-shadow模拟边框"><a href="#3-3-box-shadow模拟边框" class="headerlink" title="3.3 box-shadow模拟边框"></a>3.3 box-shadow模拟边框</h3><pre class=" language-text"><code class="language-text">.div {
-  box-shadow: inset 0px -1px 1px -1px #c8c7cc;
-}
-</code></pre>
+<p>/**</p>
 <ul>
-<li>缺点<ul>
-<li>会有颜色渐变</li>
+<li>我们都知道，promise 的优势在于可以链式调用。</li>
+<li>在我们使用 Promise 的时候，当 then 函数中 return 了一个值，不管是什么值，我们都能在下一个 then 中获取到，这就是所谓的then 的链式调用。</li>
+<li>而且，当我们不在 then 中放入参数，例：promise.then().then()，那么其后面的 then 依旧可以得到之前 then 返回的值，这就是所谓的值的穿透。</li>
+<li>那具体如何实现呢？简单思考一下，如果每次调用 then 的时候，我们都重新创建一个 promise 对象，并把上一个 then 的返回结果传给这个新的 promise 的 then 方法，不就可以一直 then 下去了么？</li>
+<li>那我们来试着实现一下。这也是手写 Promise 源码的重中之重，所以，打起精神来，重头戏来咯！</li>
+<li>/</li>
 </ul>
-</li>
+<p>// 因为我们的promise是要满足A+规范的、所以我们在过一遍</p>
+<p>/**</p>
+<ul>
+<li>1、then 的参数 onFulfilled 和 onRejected 可以缺省，如果 onFulfilled 或者 onRejected不是函数，将其忽略，且依旧可以在下面的 then 中获取到之前返回的值</li>
+<li>这个第一条其实就是一个值的穿透 + 忽略非函数的值 「规范 Promise/A+ 2.2.1、2.2.1.1、2.2.1.2」</li>
+<li></li>
+<li>2、如果 then 的返回值 x 是一个普通值，那么就会把这个结果作为参数，传递给下一个 then 的成功的回调中；</li>
+<li></li>
+<li>3、如果 then 中抛出了异常，那么就会把这个异常作为参数，传递给下一个 then 的失败的回调中；「规范 Promise/A+ 2.2.7.2」</li>
+<li></li>
+<li>4、如果 then 的返回值 x 是一个 promise，那么会等这个 promise 执行完，promise 如果成功，就走下一个 then 的成功；如果失败，就走下一个 then 的失败；如果抛出异常，就走下一个 then 的失败；</li>
+<li>「规范 Promise/A+ 2.2.7.3、2.2.7.4」</li>
+<li></li>
+<li>5、如果 then 的返回值 x 和 promise 是同一个引用对象，造成循环引用，则抛出异常，把异常传递给下一个 then 的失败的回调中；「规范 Promise/A+ 2.3.1」</li>
+<li></li>
+<li>6、如果 then 的返回值 x 是一个 promise，且 x 同时调用 resolve 函数和 reject 函数，则第一次调用优先，其他所有调用被忽略；「规范 Promise/A+ 2.3.3.3.3」</li>
+<li></li>
+<li>/</li>
 </ul>
-<h3 id="3-4-border-image的方式"><a href="#3-4-border-image的方式" class="headerlink" title="3.4 border-image的方式"></a>3.4 border-image的方式</h3><pre class=" language-text"><code class="language-text">.background-image-1px {
-  background: url(...) no-repeat left bottom;
-  -webkit-background-size: 100% 1px;
-  background-size: 100% 1px;
-}
+<p>// 下面则是完整的代码</p>
+<p>const resolvePromise = (promise2, x, resolve, reject) =&gt; {<br>  // 自己等待自己完成是错误的实现，用一个类型错误，结束掉 promise  Promise/A+ 2.3.1<br>  if (promise2 === x) {<br>    return reject(new TypeError(‘Chaining cycle detected for promise #<Promise>‘))<br>  }<br>  // Promise/A+ 2.3.3.3.3 只能调用一次<br>  let called;<br>  // 后续的条件要严格判断 保证代码能和别的库一起使用<br>  if ((typeof x === ‘object’ &amp;&amp; x != null) || typeof x === ‘function’) {<br>    try {<br>      // 为了判断 resolve 过的就不用再 reject 了（比如 reject 和 resolve 同时调用的时候）  Promise/A+ 2.3.3.1<br>      let then = x.then;<br>      if (typeof then === ‘function’) {<br>        // 不要写成 x.then，直接 then.call 就可以了 因为 x.then 会再次取值，Object.defineProperty  Promise/A+ 2.3.3.3<br>        then.call(x, y =&gt; { // 根据 promise 的状态决定是成功还是失败<br>          if (called) return;<br>          called = true;<br>          // 递归解析的过程（因为可能 promise 中还有 promise） Promise/A+ 2.3.3.3.1<br>          resolvePromise(promise2, y, resolve, reject);<br>        }, r =&gt; {<br>          // 只要失败就失败 Promise/A+ 2.3.3.3.2<br>          if (called) return;<br>          called = true;<br>          reject(r);<br>        });<br>      } else {<br>        // 如果 x.then 是个普通值就直接返回 resolve 作为结果  Promise/A+ 2.3.3.4<br>        resolve(x);<br>      }<br>    } catch (e) {<br>      // Promise/A+ 2.3.3.2<br>      if (called) return;<br>      called = true;<br>      reject(e)<br>    }<br>  } else {<br>    // 如果 x 是个普通值就直接返回 resolve 作为结果  Promise/A+ 2.3.4<br>    resolve(x)<br>  }<br>}</p>
+<p>class Promise {<br>  constructor(executor) {<br>    this.status = PENDING;<br>    this.value = undefined;<br>    this.reason = undefined;<br>    this.onResolvedCallbacks = [];<br>    this.onRejectedCallbacks= [];</p>
+<pre><code>let resolve = (value) =&gt; &#123;
+  if(this.status ===  PENDING) &#123;
+    this.status = FULFILLED;
+    this.value = value;
+    this.onResolvedCallbacks.forEach(fn=&gt;fn());
+  &#125;
+&#125; 
 
-.border-bottom-1px {
-  border-width: 0 0 1px 0;
-  -webkit-border-image: url(...) 0 0 2 0 stretch;
-  border-image: url(...) 0 0 2 0 stretch;
-}
+let reject = (reason) =&gt; &#123;
+  if(this.status ===  PENDING) &#123;
+    this.status = REJECTED;
+    this.reason = reason;
+    this.onRejectedCallbacks.forEach(fn=&gt;fn());
+  &#125;
+&#125;
+
+try &#123;
+  executor(resolve,reject)
+&#125; catch (error) &#123;
+  reject(error)
+&#125;
 </code></pre>
+<p>  }</p>
+<p>  then(onFulfilled, onRejected) {<br>    //解决 onFufilled，onRejected 没有传值的问题<br>    //Promise/A+ 2.2.1 / Promise/A+ 2.2.5 / Promise/A+ 2.2.7.3 / Promise/A+ 2.2.7.4<br>    onFulfilled = typeof onFulfilled === ‘function’ ? onFulfilled : v =&gt; v;<br>    //因为错误的值要让后面访问到，所以这里也要跑出个错误，不然会在之后 then 的 resolve 中捕获<br>    onRejected = typeof onRejected === ‘function’ ? onRejected : err =&gt; { throw err };<br>    // 每次调用 then 都返回一个新的 promise  Promise/A+ 2.2.7<br>    let promise2 = new Promise((resolve, reject) =&gt; {<br>      if (this.status === FULFILLED) {<br>        //Promise/A+ 2.2.2<br>        //Promise/A+ 2.2.4 — setTimeout<br>        setTimeout(() =&gt; {<br>          try {<br>            //Promise/A+ 2.2.7.1<br>            let x = onFulfilled(this.value);<br>            // x可能是一个proimise<br>            resolvePromise(promise2, x, resolve, reject);<br>          } catch (e) {<br>            //Promise/A+ 2.2.7.2<br>            reject(e)<br>          }<br>        }, 0);<br>      }</p>
+<pre><code>  if (this.status === REJECTED) &#123;
+    //Promise/A+ 2.2.3
+    setTimeout(() =&gt; &#123;
+      try &#123;
+        let x = onRejected(this.reason);
+        resolvePromise(promise2, x, resolve, reject);
+      &#125; catch (e) &#123;
+        reject(e)
+      &#125;
+    &#125;, 0);
+  &#125;
+
+  if (this.status === PENDING) &#123;
+    this.onResolvedCallbacks.push(() =&gt; &#123;
+      setTimeout(() =&gt; &#123;
+        try &#123;
+          let x = onFulfilled(this.value);
+          resolvePromise(promise2, x, resolve, reject);
+        &#125; catch (e) &#123;
+          reject(e)
+        &#125;
+      &#125;, 0);
+    &#125;);
+
+    this.onRejectedCallbacks.push(()=&gt; &#123;
+      setTimeout(() =&gt; &#123;
+        try &#123;
+          let x = onRejected(this.reason);
+          resolvePromise(promise2, x, resolve, reject)
+        &#125; catch (e) &#123;
+          reject(e)
+        &#125;
+      &#125;, 0);
+    &#125;);
+  &#125;
+&#125;);
+
+return promise2;
+</code></pre>
+<p>  }<br>}</p>
+<p>// 测试4</p>
+<p>const promise = new Promise((resolve, reject) =&gt; {<br>  reject(‘失败’)<br>}).then().then().then(data=&gt;{<br>  console.log(data)<br>},err=&gt;{<br>  console.log(‘err’,err)<br>})</p>
+<p>/**</p>
 <ul>
-<li>缺点<ul>
-<li>我想换个颜色还得换图,而且图片处理圆角会出现模糊的问题</li>
+<li>完整的测试</li>
+<li>/</li>
 </ul>
-</li>
+<p>/**</p>
+<ul>
+<li>1、增加以下代码</li>
+<li>2、安装脚本 「npm install -g promises-aplus-tests」</li>
+<li>3、执行命令 promises-aplus-tests promise.js</li>
+<li></li>
+<li>/</li>
 </ul>
-<h2 id="4、Q-amp-A"><a href="#4、Q-amp-A" class="headerlink" title="4、Q&amp;A"></a>4、Q&amp;A</h2><ul>
-<li><p>Q: 上面的解释是真的对吗？</p>
-</li>
-<li><p>A: 如果上面解释的是正确的、那么为什么1px会有问题、其他的不会有问题、比如10px、100px呢？</p>
-</li>
-<li><p>Q: 所以真正的原因是什么呢</p>
-</li>
-<li><p>A:</p>
-<pre class=" language-text"><code class="language-text">我们做移动端页面时一般都会设置meta viewport的content=“width=device-width”，
-这里就是把html视窗宽度大小设置等于设备宽度的大小，大多数手机的屏幕设备宽度都差不多，
-以iphoneX为例，屏幕宽度375px。
-而UI给设计图的时候基本上都是给的二倍图甚至三倍图，假设设计图是750px的二倍图，
-在750px上设计了1px的边框，要拿到375px宽度的手机来显示，就相当于整体设计图缩小一倍，
-所以在375px手机上要以0.5px呈现才符合预期效果，然而css里最低只支持1px大小，不足1px就以1px显示，
-所以你看到的就显得边框较粗，实际上只是设计图整体缩小了，而1px的边框没有跟着缩小导致的。
-（ps：ios较新版已支持0.5px，安卓不支持，这里暂且忽略）
-</code></pre>
-</li>
-</ul>
-<h2 id="5、总结"><a href="#5、总结" class="headerlink" title="5、总结"></a>5、总结</h2><blockquote>
-<p>根本原因就是我们开发和设计所使用的单位是不一致的、设计在二倍屏的情况下设计1px的线或者边框、我们在自己设备上开发的时候并不能支持设计需要的1px效果、所以我们需要支持兼容</p>
-</blockquote>
+<p>Promise.defer = Promise.deferred = function () {<br>  let dfd = {};<br>  dfd.promise = new Promise((resolve,reject)=&gt;{<br>      dfd.resolve = resolve;<br>      dfd.reject = reject;<br>  })<br>  return dfd;<br>}</p>
+<p>// 由于原生的 Promise 是V8引擎提供的微任务，我们无法还原V8引擎的实现，所以这里使用 setTimeout 模拟异步，所以原生的是微任务，这里是宏任务。<br>// 这可以通过“宏任务”机制（例如setTimeout或setImmediate）或“微任务”机制（例如MutatonObserver或）来实现process.nextTick。</p>
 
                 
             </div>
@@ -775,7 +709,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://example.com/posts/78cea6d8/">http://example.com/posts/78cea6d8/</a>
+                    <a href="http://example.com/books/promise.html">http://example.com/books/promise.html</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -812,11 +746,7 @@
                 <div class="post-meta__tag-list" style="display: inline-block;">
                     
                         <div class="article-tag">
-                            
-                                <a href="/tags/css/">
-                                    <span class="chip bg-color">css</span>
-                                </a>
-                            
+                            <span class="chip bg-color">无标签</span>
                         </div>
                     
                 </div>
@@ -1126,73 +1056,29 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/posts/99a94cc0/">
+                <a href="/books/promise.html">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/21.jpg" class="responsive-img" alt="手撕相关">
+                        <img src="/medias/featureimages/0.jpg" class="responsive-img" alt="">
                         
-                        <span class="card-title">手撕相关</span>
+                        <span class="card-title"></span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
                             
-                        
-                    </div>
-                    <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2021-12-14
-                        </span>
-                        <span class="publish-author">
-                            
-                            <i class="fas fa-user fa-fw"></i>
-                            huhu
-                            
-                        </span>
-                    </div>
-                </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/js/">
-                        <span class="chip bg-color">js</span>
-                    </a>
-                    
-                </div>
-                
-            </div>
-        </div>
-        
-        
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge right-badge text-color">
-                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
-            </div>
-            <div class="card">
-                <a href="/posts/1661a9ac/">
-                    <div class="card-image">
-                        
-                        
-                        <img src="/medias/featureimages/19.jpg" class="responsive-img" alt="npm">
-                        
-                        <span class="card-title">npm</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            npm 操作命令&问题记录
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-12-07
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-12-15
                             </span>
                         <span class="publish-author">
                             
@@ -1202,14 +1088,45 @@
                         </span>
                     </div>
                 </div>
+
                 
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/npm/">
-                        <span class="chip bg-color">npm</span>
-                    </a>
-                    
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                本篇&nbsp;<i class="far fa-dot-circle"></i>
+            </div>
+            <div class="card">
+                <a href="/books/promise.html">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/0.jpg" class="responsive-img" alt="">
+                        
+                        <span class="card-title"></span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-12-15
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-user fa-fw"></i>
+                            huhu
+                            
+                        </span>
+                    </div>
                 </div>
+
                 
             </div>
         </div>
