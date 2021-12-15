@@ -1,248 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>async/await</title>
-    <url>/posts/ca9ee217/</url>
-    <content><![CDATA[<h2 id="同步的方式去执行异步"><a href="#同步的方式去执行异步" class="headerlink" title="同步的方式去执行异步"></a>同步的方式去执行异步</h2><p>eg: 比如我现在有一个需求：先请求完接口1，再去请求接口2，我们通常会这么做</p>
-<pre class=" language-js"><code class="language-js"><span class="token keyword">function</span> <span class="token function">request</span><span class="token punctuation">(</span>num<span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token comment" spellcheck="true">// 模拟接口请求</span>
-  <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">Promise</span><span class="token punctuation">(</span>resolve <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
-    <span class="token function">setTimeout</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
-      <span class="token function">resolve</span><span class="token punctuation">(</span>num <span class="token operator">*</span> <span class="token number">2</span><span class="token punctuation">)</span>
-    <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token number">1000</span><span class="token punctuation">)</span>
-  <span class="token punctuation">}</span><span class="token punctuation">)</span>
-<span class="token punctuation">}</span>
-
-<span class="token function">request</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span>res1 <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
-  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>res1<span class="token punctuation">)</span> <span class="token comment" spellcheck="true">// 1秒后 输出 2</span>
-
-  <span class="token function">request</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span>res2 <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
-    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>res2<span class="token punctuation">)</span> <span class="token comment" spellcheck="true">// 2秒后 输出 4</span>
-  <span class="token punctuation">}</span><span class="token punctuation">)</span>
-<span class="token punctuation">}</span><span class="token punctuation">)</span>
-</code></pre>
-<p>eg：或者我现在又有一个需求：先请求完接口1，再拿接口1返回的数据，去当做接口2的请求参数，那我们也可以这么做</p>
-<pre class=" language-js"><code class="language-js"><span class="token function">request</span><span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span>res1 <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
-  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>res1<span class="token punctuation">)</span> <span class="token comment" spellcheck="true">// 1秒后 输出 10</span>
-
-  <span class="token function">request</span><span class="token punctuation">(</span>res1<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span>res2 <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
-    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>res2<span class="token punctuation">)</span> <span class="token comment" spellcheck="true">// 2秒后 输出 20</span>
-  <span class="token punctuation">}</span><span class="token punctuation">)</span>
-<span class="token punctuation">}</span><span class="token punctuation">)</span>
-</code></pre>
-<p>这样写没有什么问题、但是如果嵌套过深的话就不是很好了</p>
-<pre class=" language-js"><code class="language-js"><span class="token keyword">async</span> <span class="token keyword">function</span> fn <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-  <span class="token keyword">const</span> res1 <span class="token operator">=</span> <span class="token keyword">await</span> <span class="token function">request</span><span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">)</span>
-  <span class="token keyword">const</span> res2 <span class="token operator">=</span> <span class="token keyword">await</span> <span class="token function">request</span><span class="token punctuation">(</span>res1<span class="token punctuation">)</span>
-  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>res2<span class="token punctuation">)</span> <span class="token comment" spellcheck="true">// 2秒后输出 20</span>
-<span class="token punctuation">}</span>
-<span class="token function">fn</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-</code></pre>
-<h2 id="使用generator来实现async-await"><a href="#使用generator来实现async-await" class="headerlink" title="使用generator来实现async/await"></a>使用generator来实现async/await</h2><blockquote>
-<p>基本用法：generator函数跟普通函数在写法上的区别就是，多了一个星号*，并且只有在generator函数中才能使用yield，什么是yield呢，他相当于generator函数执行的中途暂停点，比如下方有3个暂停点。而怎么才能暂停后继续走呢？那就得使用到next方法，next方法执行后会返回一个对象，对象中有value 和 done两个属性</p>
-</blockquote>
-<ul>
-<li>value：暂停点后面接的值，也就是yield后面接的值</li>
-<li>done：是否generator函数已走完，没走完为false，走完为true</li>
-</ul>
-<p><em><strong>yield 后面接常量的情况</strong></em></p>
-<pre class=" language-javascript"><code class="language-javascript"><span class="token keyword">function</span><span class="token operator">*</span> <span class="token function">gen</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-  <span class="token keyword">yield</span> <span class="token number">1</span>
-  <span class="token keyword">yield</span> <span class="token number">2</span>
-  <span class="token keyword">yield</span> <span class="token number">3</span>
-<span class="token punctuation">}</span>
-<span class="token keyword">const</span> g <span class="token operator">=</span> <span class="token function">gen</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>g<span class="token punctuation">.</span><span class="token function">next</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true">// { value: 1, done: false }</span>
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>g<span class="token punctuation">.</span><span class="token function">next</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true">// { value: 2, done: false }</span>
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>g<span class="token punctuation">.</span><span class="token function">next</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true">// { value: 3, done: false }</span>
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>g<span class="token punctuation">.</span><span class="token function">next</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true">// { value: undefined, done: true }</span>
-</code></pre>
-<pre class=" language-javascript"><code class="language-javascript"><span class="token keyword">function</span><span class="token operator">*</span> <span class="token function">gen</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-  <span class="token keyword">yield</span> <span class="token number">1</span>
-  <span class="token keyword">yield</span> <span class="token number">2</span>
-  <span class="token keyword">yield</span> <span class="token number">3</span>
-  <span class="token keyword">return</span> <span class="token number">4</span>
-<span class="token punctuation">}</span>
-<span class="token keyword">const</span> g <span class="token operator">=</span> <span class="token function">gen</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>g<span class="token punctuation">.</span><span class="token function">next</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true">// { value: 1, done: false }</span>
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>g<span class="token punctuation">.</span><span class="token function">next</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true">// { value: 2, done: false }</span>
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>g<span class="token punctuation">.</span><span class="token function">next</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true">// { value: 3, done: false }</span>
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>g<span class="token punctuation">.</span><span class="token function">next</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true">// { value: 4, done: true }</span>
-</code></pre>
-<p><em><strong>yield后面接函数</strong></em></p>
-<blockquote>
-<p>yield后面接函数的话，到了对应暂停点yield，会马上执行此函数，并且该函数的执行返回值，会被当做此暂停点对象的value</p>
-</blockquote>
-<pre class=" language-javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">fn</span><span class="token punctuation">(</span>num<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>num<span class="token punctuation">)</span>
-  <span class="token keyword">return</span> num
-<span class="token punctuation">}</span>
-<span class="token keyword">function</span><span class="token operator">*</span> <span class="token function">gen</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-  <span class="token keyword">yield</span> <span class="token function">fn</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>
-  <span class="token keyword">yield</span> <span class="token function">fn</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span>
-  <span class="token keyword">return</span> <span class="token number">3</span>
-<span class="token punctuation">}</span>
-<span class="token keyword">const</span> g <span class="token operator">=</span> <span class="token function">gen</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>g<span class="token punctuation">.</span><span class="token function">next</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> 
-<span class="token comment" spellcheck="true">// 1</span>
-<span class="token comment" spellcheck="true">// { value: 1, done: false }</span>
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>g<span class="token punctuation">.</span><span class="token function">next</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-<span class="token comment" spellcheck="true">// 2</span>
-<span class="token comment" spellcheck="true">//  { value: 2, done: false }</span>
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>g<span class="token punctuation">.</span><span class="token function">next</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> 
-<span class="token comment" spellcheck="true">// { value: 3, done: true }</span>
-</code></pre>
-<p><em><strong>yield后面接Promise</strong></em></p>
-<blockquote>
-<p>前面说了，函数执行返回值会当做暂停点对象的value值，那么下面例子就可以理解了，前两个的value都是pending状态的Promise对象</p>
-</blockquote>
-<pre class=" language-javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">fn</span><span class="token punctuation">(</span>num<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-  <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">Promise</span><span class="token punctuation">(</span>resolve <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
-    <span class="token function">setTimeout</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
-      <span class="token function">resolve</span><span class="token punctuation">(</span>num<span class="token punctuation">)</span>
-    <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token number">1000</span><span class="token punctuation">)</span>
-  <span class="token punctuation">}</span><span class="token punctuation">)</span>
-<span class="token punctuation">}</span>
-<span class="token keyword">function</span><span class="token operator">*</span> <span class="token function">gen</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-  <span class="token keyword">yield</span> <span class="token function">fn</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>
-  <span class="token keyword">yield</span> <span class="token function">fn</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span>
-  <span class="token keyword">return</span> <span class="token number">3</span>
-<span class="token punctuation">}</span>
-<span class="token keyword">const</span> g <span class="token operator">=</span> <span class="token function">gen</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>g<span class="token punctuation">.</span><span class="token function">next</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true">// { value: Promise { &lt;pending> }, done: false }</span>
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>g<span class="token punctuation">.</span><span class="token function">next</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true">// { value: Promise { &lt;pending> }, done: false }</span>
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>g<span class="token punctuation">.</span><span class="token function">next</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true">// { value: 3, done: true }</span>
-</code></pre>
-<blockquote>
-<p>其实我们想要的结果是，两个Promise的结果1 和 2，那怎么做呢？很简单，使用Promise的then方法就行了</p>
-</blockquote>
-<pre class=" language-javascript"><code class="language-javascript"><span class="token keyword">const</span> g <span class="token operator">=</span> <span class="token function">gen</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-<span class="token keyword">const</span> next1 <span class="token operator">=</span> g<span class="token punctuation">.</span><span class="token function">next</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-next1<span class="token punctuation">.</span>value<span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span>res1 <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
-  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>next1<span class="token punctuation">)</span> <span class="token comment" spellcheck="true">// 1秒后输出 { value: Promise { 1 }, done: false }</span>
-  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>res1<span class="token punctuation">)</span> <span class="token comment" spellcheck="true">// 1秒后输出 1</span>
-
-  <span class="token keyword">const</span> next2 <span class="token operator">=</span> g<span class="token punctuation">.</span><span class="token function">next</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-  next2<span class="token punctuation">.</span>value<span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span>res2 <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
-    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>next2<span class="token punctuation">)</span> <span class="token comment" spellcheck="true">// 2秒后输出 { value: Promise { 2 }, done: false }</span>
-    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>res2<span class="token punctuation">)</span> <span class="token comment" spellcheck="true">// 2秒后输出 2</span>
-    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>g<span class="token punctuation">.</span><span class="token function">next</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true">// 2秒后输出 { value: 3, done: true }</span>
-  <span class="token punctuation">}</span><span class="token punctuation">)</span>
-<span class="token punctuation">}</span><span class="token punctuation">)</span>
-</code></pre>
-<p><em><strong>next函数传参</strong></em></p>
-<blockquote>
-<p>generator函数可以用next方法来传参，并且可以通过yield来接收这个参数，注意两点</p>
-</blockquote>
-<ul>
-<li><p>第一次next传参是没用的，只有从第二次开始next传参才有用</p>
-</li>
-<li><p>next传值时，要记住顺序是，先右边yield，后左边接收参数</p>
-</li>
-</ul>
-<pre class=" language-javascript"><code class="language-javascript"><span class="token keyword">function</span><span class="token operator">*</span> <span class="token function">gen</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-  <span class="token keyword">const</span> num1 <span class="token operator">=</span> <span class="token keyword">yield</span> <span class="token number">1</span>
-  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>num1<span class="token punctuation">)</span>
-  <span class="token keyword">const</span> num2 <span class="token operator">=</span> <span class="token keyword">yield</span> <span class="token number">2</span>
-  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>num2<span class="token punctuation">)</span>
-  <span class="token keyword">return</span> <span class="token number">3</span>
-<span class="token punctuation">}</span>
-<span class="token keyword">const</span> g <span class="token operator">=</span> <span class="token function">gen</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>g<span class="token punctuation">.</span><span class="token function">next</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true">// { value: 1, done: false }</span>
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>g<span class="token punctuation">.</span><span class="token function">next</span><span class="token punctuation">(</span><span class="token number">11111</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-<span class="token comment" spellcheck="true">// 11111</span>
-<span class="token comment" spellcheck="true">//  { value: 2, done: false }</span>
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>g<span class="token punctuation">.</span><span class="token function">next</span><span class="token punctuation">(</span><span class="token number">22222</span><span class="token punctuation">)</span><span class="token punctuation">)</span> 
-<span class="token comment" spellcheck="true">// 22222</span>
-<span class="token comment" spellcheck="true">// { value: 3, done: true }</span>
-</code></pre>
-<ul>
-<li><p>yield后面接Promise</p>
-</li>
-<li><p>next函数传参</p>
-</li>
-</ul>
-<p>那这两个组合起来会是什么样呢？</p>
-<pre class=" language-javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">fn</span><span class="token punctuation">(</span>nums<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-  <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">Promise</span><span class="token punctuation">(</span>resolve <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
-    <span class="token function">setTimeout</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
-      <span class="token function">resolve</span><span class="token punctuation">(</span>nums <span class="token operator">*</span> <span class="token number">2</span><span class="token punctuation">)</span>
-    <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token number">1000</span><span class="token punctuation">)</span>
-  <span class="token punctuation">}</span><span class="token punctuation">)</span>
-<span class="token punctuation">}</span>
-<span class="token keyword">function</span><span class="token operator">*</span> <span class="token function">gen</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-  <span class="token keyword">const</span> num1 <span class="token operator">=</span> <span class="token keyword">yield</span> <span class="token function">fn</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>
-  <span class="token keyword">const</span> num2 <span class="token operator">=</span> <span class="token keyword">yield</span> <span class="token function">fn</span><span class="token punctuation">(</span>num1<span class="token punctuation">)</span>
-  <span class="token keyword">const</span> num3 <span class="token operator">=</span> <span class="token keyword">yield</span> <span class="token function">fn</span><span class="token punctuation">(</span>num2<span class="token punctuation">)</span>
-  <span class="token keyword">return</span> num3
-<span class="token punctuation">}</span>
-<span class="token keyword">const</span> g <span class="token operator">=</span> <span class="token function">gen</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-<span class="token keyword">const</span> next1 <span class="token operator">=</span> g<span class="token punctuation">.</span><span class="token function">next</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-next1<span class="token punctuation">.</span>value<span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span>res1 <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
-  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>next1<span class="token punctuation">)</span> <span class="token comment" spellcheck="true">// 1秒后同时输出 { value: Promise { 2 }, done: false }</span>
-  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>res1<span class="token punctuation">)</span> <span class="token comment" spellcheck="true">// 1秒后同时输出 2</span>
-
-  <span class="token keyword">const</span> next2 <span class="token operator">=</span> g<span class="token punctuation">.</span><span class="token function">next</span><span class="token punctuation">(</span>res1<span class="token punctuation">)</span> <span class="token comment" spellcheck="true">// 传入上次的res1</span>
-  next2<span class="token punctuation">.</span>value<span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span>res2 <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
-    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>next2<span class="token punctuation">)</span> <span class="token comment" spellcheck="true">// 2秒后同时输出 { value: Promise { 4 }, done: false }</span>
-    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>res2<span class="token punctuation">)</span> <span class="token comment" spellcheck="true">// 2秒后同时输出 4</span>
-
-    <span class="token keyword">const</span> next3 <span class="token operator">=</span> g<span class="token punctuation">.</span><span class="token function">next</span><span class="token punctuation">(</span>res2<span class="token punctuation">)</span> <span class="token comment" spellcheck="true">// 传入上次的res2</span>
-    next3<span class="token punctuation">.</span>value<span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span>res3 <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
-      console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>next3<span class="token punctuation">)</span> <span class="token comment" spellcheck="true">// 3秒后同时输出 { value: Promise { 8 }, done: false }</span>
-      console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>res3<span class="token punctuation">)</span> <span class="token comment" spellcheck="true">// 3秒后同时输出 8</span>
-
-       <span class="token comment" spellcheck="true">// 传入上次的res3</span>
-      console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>g<span class="token punctuation">.</span><span class="token function">next</span><span class="token punctuation">(</span>res3<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true">// 3秒后同时输出 { value: 8, done: true }</span>
-    <span class="token punctuation">}</span><span class="token punctuation">)</span>
-  <span class="token punctuation">}</span><span class="token punctuation">)</span>
-<span class="token punctuation">}</span><span class="token punctuation">)</span>
-</code></pre>
-<pre class=" language-javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">generatorToAsync</span><span class="token punctuation">(</span>generatorFn<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-  <span class="token keyword">return</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token keyword">const</span> gen <span class="token operator">=</span> generatorFn<span class="token punctuation">.</span><span class="token function">apply</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">,</span> arguments<span class="token punctuation">)</span> <span class="token comment" spellcheck="true">// gen有可能传参</span>
-
-    <span class="token comment" spellcheck="true">// 返回一个Promise</span>
-    <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">Promise</span><span class="token punctuation">(</span><span class="token punctuation">(</span>resolve<span class="token punctuation">,</span> reject<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
-
-      <span class="token keyword">function</span> <span class="token function">go</span><span class="token punctuation">(</span>key<span class="token punctuation">,</span> arg<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token keyword">let</span> res
-        <span class="token keyword">try</span> <span class="token punctuation">{</span>
-          res <span class="token operator">=</span> gen<span class="token punctuation">[</span>key<span class="token punctuation">]</span><span class="token punctuation">(</span>arg<span class="token punctuation">)</span> <span class="token comment" spellcheck="true">// 这里有可能会执行返回reject状态的Promise</span>
-        <span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">error</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-          <span class="token keyword">return</span> <span class="token function">reject</span><span class="token punctuation">(</span>error<span class="token punctuation">)</span> <span class="token comment" spellcheck="true">// 报错的话会走catch，直接reject</span>
-        <span class="token punctuation">}</span>
-
-        <span class="token comment" spellcheck="true">// 解构获得value和done</span>
-        <span class="token keyword">const</span> <span class="token punctuation">{</span> value<span class="token punctuation">,</span> done <span class="token punctuation">}</span> <span class="token operator">=</span> res
-        <span class="token keyword">if</span> <span class="token punctuation">(</span>done<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-          <span class="token comment" spellcheck="true">// 如果done为true，说明走完了，进行resolve(value)</span>
-          <span class="token keyword">return</span> <span class="token function">resolve</span><span class="token punctuation">(</span>value<span class="token punctuation">)</span>
-        <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
-          <span class="token comment" spellcheck="true">// 如果done为false，说明没走完，还得继续走</span>
-
-          <span class="token comment" spellcheck="true">// value有可能是：常量，Promise，Promise有可能是成功或者失败</span>
-          <span class="token keyword">return</span> Promise<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span>value<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span>val <span class="token operator">=</span><span class="token operator">></span> <span class="token function">go</span><span class="token punctuation">(</span><span class="token string">'next'</span><span class="token punctuation">,</span> val<span class="token punctuation">)</span><span class="token punctuation">,</span> err <span class="token operator">=</span><span class="token operator">></span> <span class="token function">go</span><span class="token punctuation">(</span><span class="token string">'throw'</span><span class="token punctuation">,</span> err<span class="token punctuation">)</span><span class="token punctuation">)</span>
-        <span class="token punctuation">}</span>
-      <span class="token punctuation">}</span>
-
-      <span class="token function">go</span><span class="token punctuation">(</span><span class="token string">"next"</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true">// 第一次执行</span>
-    <span class="token punctuation">}</span><span class="token punctuation">)</span>
-  <span class="token punctuation">}</span>
-<span class="token punctuation">}</span>
-
-<span class="token keyword">const</span> asyncFn <span class="token operator">=</span> <span class="token function">generatorToAsync</span><span class="token punctuation">(</span>gen<span class="token punctuation">)</span>
-
-<span class="token function">asyncFn</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span>res <span class="token operator">=</span><span class="token operator">></span> console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>res<span class="token punctuation">)</span><span class="token punctuation">)</span>
-</code></pre>
-]]></content>
-      <categories>
-        <category>javascript</category>
-      </categories>
-      <tags>
-        <tag>js</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>css</title>
     <url>/posts/78cea6d8/</url>
     <content><![CDATA[<h2 id="1、问题描述"><a href="#1、问题描述" class="headerlink" title="1、问题描述"></a>1、问题描述</h2><p>移动端h5、1px问题、导致边框变粗、设计稿为1px、但是效果图看起来是比1px粗的问题</p>
@@ -488,9 +246,243 @@ next1<span class="token punctuation">.</span>value<span class="token punctuation
       </tags>
   </entry>
   <entry>
-    <title>手撕相关</title>
-    <url>/posts/99a94cc0/</url>
-    <content><![CDATA[<h2 id="一、常见手撕相关的问题总结"><a href="#一、常见手撕相关的问题总结" class="headerlink" title="一、常见手撕相关的问题总结"></a>一、常见手撕相关的问题总结</h2>]]></content>
+    <title>async/await</title>
+    <url>/posts/ca9ee217/</url>
+    <content><![CDATA[<h2 id="同步的方式去执行异步"><a href="#同步的方式去执行异步" class="headerlink" title="同步的方式去执行异步"></a>同步的方式去执行异步</h2><p>eg: 比如我现在有一个需求：先请求完接口1，再去请求接口2，我们通常会这么做</p>
+<pre class=" language-js"><code class="language-js"><span class="token keyword">function</span> <span class="token function">request</span><span class="token punctuation">(</span>num<span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token comment" spellcheck="true">// 模拟接口请求</span>
+  <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">Promise</span><span class="token punctuation">(</span>resolve <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+    <span class="token function">setTimeout</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+      <span class="token function">resolve</span><span class="token punctuation">(</span>num <span class="token operator">*</span> <span class="token number">2</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token number">1000</span><span class="token punctuation">)</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+<span class="token function">request</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span>res1 <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>res1<span class="token punctuation">)</span> <span class="token comment" spellcheck="true">// 1秒后 输出 2</span>
+
+  <span class="token function">request</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span>res2 <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>res2<span class="token punctuation">)</span> <span class="token comment" spellcheck="true">// 2秒后 输出 4</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+</code></pre>
+<p>eg：或者我现在又有一个需求：先请求完接口1，再拿接口1返回的数据，去当做接口2的请求参数，那我们也可以这么做</p>
+<pre class=" language-js"><code class="language-js"><span class="token function">request</span><span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span>res1 <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>res1<span class="token punctuation">)</span> <span class="token comment" spellcheck="true">// 1秒后 输出 10</span>
+
+  <span class="token function">request</span><span class="token punctuation">(</span>res1<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span>res2 <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>res2<span class="token punctuation">)</span> <span class="token comment" spellcheck="true">// 2秒后 输出 20</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+</code></pre>
+<p>这样写没有什么问题、但是如果嵌套过深的话就不是很好了</p>
+<pre class=" language-js"><code class="language-js"><span class="token keyword">async</span> <span class="token keyword">function</span> fn <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">const</span> res1 <span class="token operator">=</span> <span class="token keyword">await</span> <span class="token function">request</span><span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">)</span>
+  <span class="token keyword">const</span> res2 <span class="token operator">=</span> <span class="token keyword">await</span> <span class="token function">request</span><span class="token punctuation">(</span>res1<span class="token punctuation">)</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>res2<span class="token punctuation">)</span> <span class="token comment" spellcheck="true">// 2秒后输出 20</span>
+<span class="token punctuation">}</span>
+<span class="token function">fn</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+</code></pre>
+<h2 id="使用generator来实现async-await"><a href="#使用generator来实现async-await" class="headerlink" title="使用generator来实现async/await"></a>使用generator来实现async/await</h2><blockquote>
+<p>基本用法：generator函数跟普通函数在写法上的区别就是，多了一个星号*，并且只有在generator函数中才能使用yield，什么是yield呢，他相当于generator函数执行的中途暂停点，比如下方有3个暂停点。而怎么才能暂停后继续走呢？那就得使用到next方法，next方法执行后会返回一个对象，对象中有value 和 done两个属性</p>
+</blockquote>
+<ul>
+<li>value：暂停点后面接的值，也就是yield后面接的值</li>
+<li>done：是否generator函数已走完，没走完为false，走完为true</li>
+</ul>
+<p><em><strong>yield 后面接常量的情况</strong></em></p>
+<pre class=" language-javascript"><code class="language-javascript"><span class="token keyword">function</span><span class="token operator">*</span> <span class="token function">gen</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">yield</span> <span class="token number">1</span>
+  <span class="token keyword">yield</span> <span class="token number">2</span>
+  <span class="token keyword">yield</span> <span class="token number">3</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">const</span> g <span class="token operator">=</span> <span class="token function">gen</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>g<span class="token punctuation">.</span><span class="token function">next</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true">// { value: 1, done: false }</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>g<span class="token punctuation">.</span><span class="token function">next</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true">// { value: 2, done: false }</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>g<span class="token punctuation">.</span><span class="token function">next</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true">// { value: 3, done: false }</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>g<span class="token punctuation">.</span><span class="token function">next</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true">// { value: undefined, done: true }</span>
+</code></pre>
+<pre class=" language-javascript"><code class="language-javascript"><span class="token keyword">function</span><span class="token operator">*</span> <span class="token function">gen</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">yield</span> <span class="token number">1</span>
+  <span class="token keyword">yield</span> <span class="token number">2</span>
+  <span class="token keyword">yield</span> <span class="token number">3</span>
+  <span class="token keyword">return</span> <span class="token number">4</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">const</span> g <span class="token operator">=</span> <span class="token function">gen</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>g<span class="token punctuation">.</span><span class="token function">next</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true">// { value: 1, done: false }</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>g<span class="token punctuation">.</span><span class="token function">next</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true">// { value: 2, done: false }</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>g<span class="token punctuation">.</span><span class="token function">next</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true">// { value: 3, done: false }</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>g<span class="token punctuation">.</span><span class="token function">next</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true">// { value: 4, done: true }</span>
+</code></pre>
+<p><em><strong>yield后面接函数</strong></em></p>
+<blockquote>
+<p>yield后面接函数的话，到了对应暂停点yield，会马上执行此函数，并且该函数的执行返回值，会被当做此暂停点对象的value</p>
+</blockquote>
+<pre class=" language-javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">fn</span><span class="token punctuation">(</span>num<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>num<span class="token punctuation">)</span>
+  <span class="token keyword">return</span> num
+<span class="token punctuation">}</span>
+<span class="token keyword">function</span><span class="token operator">*</span> <span class="token function">gen</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">yield</span> <span class="token function">fn</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>
+  <span class="token keyword">yield</span> <span class="token function">fn</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span>
+  <span class="token keyword">return</span> <span class="token number">3</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">const</span> g <span class="token operator">=</span> <span class="token function">gen</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>g<span class="token punctuation">.</span><span class="token function">next</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> 
+<span class="token comment" spellcheck="true">// 1</span>
+<span class="token comment" spellcheck="true">// { value: 1, done: false }</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>g<span class="token punctuation">.</span><span class="token function">next</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token comment" spellcheck="true">// 2</span>
+<span class="token comment" spellcheck="true">//  { value: 2, done: false }</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>g<span class="token punctuation">.</span><span class="token function">next</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> 
+<span class="token comment" spellcheck="true">// { value: 3, done: true }</span>
+</code></pre>
+<p><em><strong>yield后面接Promise</strong></em></p>
+<blockquote>
+<p>前面说了，函数执行返回值会当做暂停点对象的value值，那么下面例子就可以理解了，前两个的value都是pending状态的Promise对象</p>
+</blockquote>
+<pre class=" language-javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">fn</span><span class="token punctuation">(</span>num<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">Promise</span><span class="token punctuation">(</span>resolve <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+    <span class="token function">setTimeout</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+      <span class="token function">resolve</span><span class="token punctuation">(</span>num<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token number">1000</span><span class="token punctuation">)</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">function</span><span class="token operator">*</span> <span class="token function">gen</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">yield</span> <span class="token function">fn</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>
+  <span class="token keyword">yield</span> <span class="token function">fn</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span>
+  <span class="token keyword">return</span> <span class="token number">3</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">const</span> g <span class="token operator">=</span> <span class="token function">gen</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>g<span class="token punctuation">.</span><span class="token function">next</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true">// { value: Promise { &lt;pending> }, done: false }</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>g<span class="token punctuation">.</span><span class="token function">next</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true">// { value: Promise { &lt;pending> }, done: false }</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>g<span class="token punctuation">.</span><span class="token function">next</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true">// { value: 3, done: true }</span>
+</code></pre>
+<blockquote>
+<p>其实我们想要的结果是，两个Promise的结果1 和 2，那怎么做呢？很简单，使用Promise的then方法就行了</p>
+</blockquote>
+<pre class=" language-javascript"><code class="language-javascript"><span class="token keyword">const</span> g <span class="token operator">=</span> <span class="token function">gen</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token keyword">const</span> next1 <span class="token operator">=</span> g<span class="token punctuation">.</span><span class="token function">next</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+next1<span class="token punctuation">.</span>value<span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span>res1 <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>next1<span class="token punctuation">)</span> <span class="token comment" spellcheck="true">// 1秒后输出 { value: Promise { 1 }, done: false }</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>res1<span class="token punctuation">)</span> <span class="token comment" spellcheck="true">// 1秒后输出 1</span>
+
+  <span class="token keyword">const</span> next2 <span class="token operator">=</span> g<span class="token punctuation">.</span><span class="token function">next</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+  next2<span class="token punctuation">.</span>value<span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span>res2 <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>next2<span class="token punctuation">)</span> <span class="token comment" spellcheck="true">// 2秒后输出 { value: Promise { 2 }, done: false }</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>res2<span class="token punctuation">)</span> <span class="token comment" spellcheck="true">// 2秒后输出 2</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>g<span class="token punctuation">.</span><span class="token function">next</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true">// 2秒后输出 { value: 3, done: true }</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+</code></pre>
+<p><em><strong>next函数传参</strong></em></p>
+<blockquote>
+<p>generator函数可以用next方法来传参，并且可以通过yield来接收这个参数，注意两点</p>
+</blockquote>
+<ul>
+<li><p>第一次next传参是没用的，只有从第二次开始next传参才有用</p>
+</li>
+<li><p>next传值时，要记住顺序是，先右边yield，后左边接收参数</p>
+</li>
+</ul>
+<pre class=" language-javascript"><code class="language-javascript"><span class="token keyword">function</span><span class="token operator">*</span> <span class="token function">gen</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">const</span> num1 <span class="token operator">=</span> <span class="token keyword">yield</span> <span class="token number">1</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>num1<span class="token punctuation">)</span>
+  <span class="token keyword">const</span> num2 <span class="token operator">=</span> <span class="token keyword">yield</span> <span class="token number">2</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>num2<span class="token punctuation">)</span>
+  <span class="token keyword">return</span> <span class="token number">3</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">const</span> g <span class="token operator">=</span> <span class="token function">gen</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>g<span class="token punctuation">.</span><span class="token function">next</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true">// { value: 1, done: false }</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>g<span class="token punctuation">.</span><span class="token function">next</span><span class="token punctuation">(</span><span class="token number">11111</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token comment" spellcheck="true">// 11111</span>
+<span class="token comment" spellcheck="true">//  { value: 2, done: false }</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>g<span class="token punctuation">.</span><span class="token function">next</span><span class="token punctuation">(</span><span class="token number">22222</span><span class="token punctuation">)</span><span class="token punctuation">)</span> 
+<span class="token comment" spellcheck="true">// 22222</span>
+<span class="token comment" spellcheck="true">// { value: 3, done: true }</span>
+</code></pre>
+<ul>
+<li><p>yield后面接Promise</p>
+</li>
+<li><p>next函数传参</p>
+</li>
+</ul>
+<p>那这两个组合起来会是什么样呢？</p>
+<pre class=" language-javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">fn</span><span class="token punctuation">(</span>nums<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">Promise</span><span class="token punctuation">(</span>resolve <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+    <span class="token function">setTimeout</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+      <span class="token function">resolve</span><span class="token punctuation">(</span>nums <span class="token operator">*</span> <span class="token number">2</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token number">1000</span><span class="token punctuation">)</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">function</span><span class="token operator">*</span> <span class="token function">gen</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">const</span> num1 <span class="token operator">=</span> <span class="token keyword">yield</span> <span class="token function">fn</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>
+  <span class="token keyword">const</span> num2 <span class="token operator">=</span> <span class="token keyword">yield</span> <span class="token function">fn</span><span class="token punctuation">(</span>num1<span class="token punctuation">)</span>
+  <span class="token keyword">const</span> num3 <span class="token operator">=</span> <span class="token keyword">yield</span> <span class="token function">fn</span><span class="token punctuation">(</span>num2<span class="token punctuation">)</span>
+  <span class="token keyword">return</span> num3
+<span class="token punctuation">}</span>
+<span class="token keyword">const</span> g <span class="token operator">=</span> <span class="token function">gen</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token keyword">const</span> next1 <span class="token operator">=</span> g<span class="token punctuation">.</span><span class="token function">next</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+next1<span class="token punctuation">.</span>value<span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span>res1 <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>next1<span class="token punctuation">)</span> <span class="token comment" spellcheck="true">// 1秒后同时输出 { value: Promise { 2 }, done: false }</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>res1<span class="token punctuation">)</span> <span class="token comment" spellcheck="true">// 1秒后同时输出 2</span>
+
+  <span class="token keyword">const</span> next2 <span class="token operator">=</span> g<span class="token punctuation">.</span><span class="token function">next</span><span class="token punctuation">(</span>res1<span class="token punctuation">)</span> <span class="token comment" spellcheck="true">// 传入上次的res1</span>
+  next2<span class="token punctuation">.</span>value<span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span>res2 <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>next2<span class="token punctuation">)</span> <span class="token comment" spellcheck="true">// 2秒后同时输出 { value: Promise { 4 }, done: false }</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>res2<span class="token punctuation">)</span> <span class="token comment" spellcheck="true">// 2秒后同时输出 4</span>
+
+    <span class="token keyword">const</span> next3 <span class="token operator">=</span> g<span class="token punctuation">.</span><span class="token function">next</span><span class="token punctuation">(</span>res2<span class="token punctuation">)</span> <span class="token comment" spellcheck="true">// 传入上次的res2</span>
+    next3<span class="token punctuation">.</span>value<span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span>res3 <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+      console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>next3<span class="token punctuation">)</span> <span class="token comment" spellcheck="true">// 3秒后同时输出 { value: Promise { 8 }, done: false }</span>
+      console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>res3<span class="token punctuation">)</span> <span class="token comment" spellcheck="true">// 3秒后同时输出 8</span>
+
+       <span class="token comment" spellcheck="true">// 传入上次的res3</span>
+      console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>g<span class="token punctuation">.</span><span class="token function">next</span><span class="token punctuation">(</span>res3<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true">// 3秒后同时输出 { value: 8, done: true }</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+</code></pre>
+<pre class=" language-javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">generatorToAsync</span><span class="token punctuation">(</span>generatorFn<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">return</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">const</span> gen <span class="token operator">=</span> generatorFn<span class="token punctuation">.</span><span class="token function">apply</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">,</span> arguments<span class="token punctuation">)</span> <span class="token comment" spellcheck="true">// gen有可能传参</span>
+
+    <span class="token comment" spellcheck="true">// 返回一个Promise</span>
+    <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">Promise</span><span class="token punctuation">(</span><span class="token punctuation">(</span>resolve<span class="token punctuation">,</span> reject<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+
+      <span class="token keyword">function</span> <span class="token function">go</span><span class="token punctuation">(</span>key<span class="token punctuation">,</span> arg<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">let</span> res
+        <span class="token keyword">try</span> <span class="token punctuation">{</span>
+          res <span class="token operator">=</span> gen<span class="token punctuation">[</span>key<span class="token punctuation">]</span><span class="token punctuation">(</span>arg<span class="token punctuation">)</span> <span class="token comment" spellcheck="true">// 这里有可能会执行返回reject状态的Promise</span>
+        <span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">error</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+          <span class="token keyword">return</span> <span class="token function">reject</span><span class="token punctuation">(</span>error<span class="token punctuation">)</span> <span class="token comment" spellcheck="true">// 报错的话会走catch，直接reject</span>
+        <span class="token punctuation">}</span>
+
+        <span class="token comment" spellcheck="true">// 解构获得value和done</span>
+        <span class="token keyword">const</span> <span class="token punctuation">{</span> value<span class="token punctuation">,</span> done <span class="token punctuation">}</span> <span class="token operator">=</span> res
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>done<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+          <span class="token comment" spellcheck="true">// 如果done为true，说明走完了，进行resolve(value)</span>
+          <span class="token keyword">return</span> <span class="token function">resolve</span><span class="token punctuation">(</span>value<span class="token punctuation">)</span>
+        <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+          <span class="token comment" spellcheck="true">// 如果done为false，说明没走完，还得继续走</span>
+
+          <span class="token comment" spellcheck="true">// value有可能是：常量，Promise，Promise有可能是成功或者失败</span>
+          <span class="token keyword">return</span> Promise<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span>value<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span>val <span class="token operator">=</span><span class="token operator">></span> <span class="token function">go</span><span class="token punctuation">(</span><span class="token string">'next'</span><span class="token punctuation">,</span> val<span class="token punctuation">)</span><span class="token punctuation">,</span> err <span class="token operator">=</span><span class="token operator">></span> <span class="token function">go</span><span class="token punctuation">(</span><span class="token string">'throw'</span><span class="token punctuation">,</span> err<span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
+      <span class="token punctuation">}</span>
+
+      <span class="token function">go</span><span class="token punctuation">(</span><span class="token string">"next"</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true">// 第一次执行</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">const</span> asyncFn <span class="token operator">=</span> <span class="token function">generatorToAsync</span><span class="token punctuation">(</span>gen<span class="token punctuation">)</span>
+
+<span class="token function">asyncFn</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span>res <span class="token operator">=</span><span class="token operator">></span> console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>res<span class="token punctuation">)</span><span class="token punctuation">)</span>
+</code></pre>
+]]></content>
+      <categories>
+        <category>javascript</category>
+      </categories>
       <tags>
         <tag>js</tag>
       </tags>
@@ -542,6 +534,85 @@ $ <span class="token function">npm</span> <span class="token function">install</
       </categories>
       <tags>
         <tag>hexo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>git合并分支</title>
+    <url>/posts/a162557e/</url>
+    <content><![CDATA[<h2 id="git合并分支的方式"><a href="#git合并分支的方式" class="headerlink" title="git合并分支的方式"></a>git合并分支的方式</h2><ul>
+<li><p>git merge</p>
+</li>
+<li><p>git rebase</p>
+</li>
+<li><p>git cherry-pick</p>
+</li>
+</ul>
+<blockquote>
+<p>上面三个操作都可以进行分支合并、但是各不相同、但是都要切换到合并到目标分支上操作</p>
+</blockquote>
+<h3 id="先来说说-git-merge的实现方式"><a href="#先来说说-git-merge的实现方式" class="headerlink" title="先来说说 git merge的实现方式"></a>先来说说 git merge的实现方式</h3><p><img src="https://raw.githubusercontent.com/hhf-ggt/project-Img/master/images/git/git-branch.png" alt="图1"></p>
+<blockquote>
+<p>如上图所示，我们有两个分支，master 分支和 test 分支，test 分支是基于 master 分支在B处的提交节点创建的，在创建后 master 分支又经过迭代提交了两次，从C到D节点，test 分支也基于B往前继续更新了两次，到了F节点。两者从B开始就走向了分叉。</p>
+</blockquote>
+<p>这时如果我们想将 test 分支合并到 master 分支，通过 merge 是如何工作的呢？</p>
+<pre class=" language-bash"><code class="language-bash">//将分支切换到master分支
+<span class="token function">git</span> checkout master
+​
+//把test分支合并到master分支
+<span class="token function">git</span> merge <span class="token function">test</span>
+</code></pre>
+<p><img src="https://raw.githubusercontent.com/hhf-ggt/project-Img/master/images/git/git-merge.png" alt="merge合并"></p>
+<blockquote>
+<p>从图中可以看到，这里生成了一个新的提交G，是怎么生成的呢？ merge 命令 它会把两个分支的最新快照（F、E 和 D、C）以及二者最近的共同祖先（B）进行三方合并，合并的结果是生成一个新的快照G（并提交）。</p>
+</blockquote>
+<h2 id="git-rebase"><a href="#git-rebase" class="headerlink" title="git rebase"></a>git rebase</h2><pre class=" language-bash"><code class="language-bash">//将分支切换到master分支
+<span class="token function">git</span> checkout master
+​
+//把test分支合并到master分支
+<span class="token function">git</span> rebase <span class="token function">test</span>
+</code></pre>
+<p><img src="https://raw.githubusercontent.com/hhf-ggt/project-Img/master/images/git/git-rebase.png" alt="git rebase"></p>
+<p>从图就可以看出和 merge 命令不同</p>
+<p>这里有个名词定义我们先简单说明一下</p>
+<ul>
+<li>test:基分支、目标分支</li>
+<li>master: 待变基分支，当前分支</li>
+</ul>
+<blockquote>
+<p>官方解释： 当执行 rebase 操作时，git 会从两个分支的共同祖先开始提取待变基分支上的修改，然后将待变基分支指向基分支的最新提交，最后将刚才提取的修改应用到基分支的最新提交的后面。</p>
+</blockquote>
+<blockquote>
+<p>我们结合具体例子来说明，当我们在master (待变基分支)上执行git rebase test(基分支)时,git就会从两者的共同祖先B开始，提取 master 分支上的修改，也就是 C,D 两个 commit ,提取到之后 git 会先保存起来，然后将master 分支指向 test 分支最新提交的节点，也就是F节点，然后把提取到的 C,D 接到F后面，在这个过程当中，会删除原来的C,D commit 记录，生成新的C‘，D’，虽然C’,D’和原来的C,Dcoommit的内容是一样的，但是 commit id 是不同的。</p>
+</blockquote>
+<blockquote>
+<p>rebase 操作如果用一句话进行解释就是改变基底。master 分支原来的基底是A，现在变成了以 test 分支最新的提交F做为新的基底了。</p>
+</blockquote>
+<h2 id="git-cherry-pick"><a href="#git-cherry-pick" class="headerlink" title="git cherry-pick"></a>git cherry-pick</h2><blockquote>
+<p>是将某几次提交合并到我们的分支上</p>
+</blockquote>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ul>
+<li>merge 和 rebase 这两者哪种操作更好，这是取决于不同的场景的。</li>
+</ul>
+<blockquote>
+<p>当我们拉取公共分支最新代码的时候建议使用rebase，也就是git pull -r或git pull –rebase，但有个缺点就是 rebase 以后我就不知道我的当前分支最早是从哪个分支拉出来的了，因为基底变了嘛。（如果使用 merge ，多出无意义的一条提交记录）。</p>
+</blockquote>
+<blockquote>
+<p>往公共分支上合代码的时候，使用 merge 。（如果使用 rebase ，那么其他开发人员想看主分支的历史，就不是原来的历史了，历史已经被你篡改了），例如主分支是 master 分支,我有一个 egg 分支，我在 egg 分支上写了很多垃圾代码，然后这时候我把 egg 分支通过 rebase 命令合并到 master 分支，那对于 master 分支来说，它之前到提交历史就没了，别的同事突然想看 master 分支以前的提交历史，其实就看不到了，发现只能看到我 egg 的提交历史，估计同事会把我的 egg 捏碎的，这种傻事可不要干哟。</p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>git</category>
+      </categories>
+      <tags>
+        <tag>git</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>手撕相关</title>
+    <url>/posts/99a94cc0/</url>
+    <content><![CDATA[<h2 id="一、常见手撕相关的问题总结"><a href="#一、常见手撕相关的问题总结" class="headerlink" title="一、常见手撕相关的问题总结"></a>一、常见手撕相关的问题总结</h2>]]></content>
+      <tags>
+        <tag>js</tag>
       </tags>
   </entry>
   <entry>
@@ -1044,74 +1115,6 @@ Promise<span class="token punctuation">.</span>defer <span class="token operator
       </categories>
       <tags>
         <tag>js</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>git合并分支</title>
-    <url>/posts/a162557e/</url>
-    <content><![CDATA[<h2 id="git合并分支的方式"><a href="#git合并分支的方式" class="headerlink" title="git合并分支的方式"></a>git合并分支的方式</h2><ul>
-<li><p>git merge</p>
-</li>
-<li><p>git rebase</p>
-</li>
-<li><p>git cherry-pick</p>
-</li>
-</ul>
-<blockquote>
-<p>上面三个操作都可以进行分支合并、但是各不相同、但是都要切换到合并到目标分支上操作</p>
-</blockquote>
-<h3 id="先来说说-git-merge的实现方式"><a href="#先来说说-git-merge的实现方式" class="headerlink" title="先来说说 git merge的实现方式"></a>先来说说 git merge的实现方式</h3><p><img src="https://raw.githubusercontent.com/hhf-ggt/project-Img/master/images/git/git-branch.png" alt="图1"></p>
-<blockquote>
-<p>如上图所示，我们有两个分支，master 分支和 test 分支，test 分支是基于 master 分支在B处的提交节点创建的，在创建后 master 分支又经过迭代提交了两次，从C到D节点，test 分支也基于B往前继续更新了两次，到了F节点。两者从B开始就走向了分叉。</p>
-</blockquote>
-<p>这时如果我们想将 test 分支合并到 master 分支，通过 merge 是如何工作的呢？</p>
-<pre class=" language-bash"><code class="language-bash">//将分支切换到master分支
-<span class="token function">git</span> checkout master
-​
-//把test分支合并到master分支
-<span class="token function">git</span> merge <span class="token function">test</span>
-</code></pre>
-<p><img src="https://raw.githubusercontent.com/hhf-ggt/project-Img/master/images/git/git-merge.png" alt="merge合并"></p>
-<blockquote>
-<p>从图中可以看到，这里生成了一个新的提交G，是怎么生成的呢？ merge 命令 它会把两个分支的最新快照（F、E 和 D、C）以及二者最近的共同祖先（B）进行三方合并，合并的结果是生成一个新的快照G（并提交）。</p>
-</blockquote>
-<h2 id="git-rebase"><a href="#git-rebase" class="headerlink" title="git rebase"></a>git rebase</h2><pre class=" language-bash"><code class="language-bash">//将分支切换到master分支
-<span class="token function">git</span> checkout master
-​
-//把test分支合并到master分支
-<span class="token function">git</span> rebase <span class="token function">test</span>
-</code></pre>
-<p><img src="https://raw.githubusercontent.com/hhf-ggt/project-Img/master/images/git/git-rebase.png" alt="git rebase"></p>
-<p>从图就可以看出和 merge 命令不同</p>
-<p>这里有个名词定义我们先简单说明一下</p>
-<ul>
-<li>test:基分支、目标分支</li>
-<li>master: 待变基分支，当前分支</li>
-</ul>
-<blockquote>
-<p>官方解释： 当执行 rebase 操作时，git 会从两个分支的共同祖先开始提取待变基分支上的修改，然后将待变基分支指向基分支的最新提交，最后将刚才提取的修改应用到基分支的最新提交的后面。</p>
-</blockquote>
-<blockquote>
-<p>我们结合具体例子来说明，当我们在master (待变基分支)上执行git rebase test(基分支)时,git就会从两者的共同祖先B开始，提取 master 分支上的修改，也就是 C,D 两个 commit ,提取到之后 git 会先保存起来，然后将master 分支指向 test 分支最新提交的节点，也就是F节点，然后把提取到的 C,D 接到F后面，在这个过程当中，会删除原来的C,D commit 记录，生成新的C‘，D’，虽然C’,D’和原来的C,Dcoommit的内容是一样的，但是 commit id 是不同的。</p>
-</blockquote>
-<blockquote>
-<p>rebase 操作如果用一句话进行解释就是改变基底。master 分支原来的基底是A，现在变成了以 test 分支最新的提交F做为新的基底了。</p>
-</blockquote>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ul>
-<li>merge 和 rebase 这两者哪种操作更好，这是取决于不同的场景的。</li>
-</ul>
-<blockquote>
-<p>当我们拉取公共分支最新代码的时候建议使用rebase，也就是git pull -r或git pull –rebase，但有个缺点就是 rebase 以后我就不知道我的当前分支最早是从哪个分支拉出来的了，因为基底变了嘛。（如果使用 merge ，多出无意义的一条提交记录）。</p>
-</blockquote>
-<blockquote>
-<p>往公共分支上合代码的时候，使用 merge 。（如果使用 rebase ，那么其他开发人员想看主分支的历史，就不是原来的历史了，历史已经被你篡改了），例如主分支是 master 分支,我有一个 egg 分支，我在 egg 分支上写了很多垃圾代码，然后这时候我把 egg 分支通过 rebase 命令合并到 master 分支，那对于 master 分支来说，它之前到提交历史就没了，别的同事突然想看 master 分支以前的提交历史，其实就看不到了，发现只能看到我 egg 的提交历史，估计同事会把我的 egg 捏碎的，这种傻事可不要干哟。</p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>git</category>
-      </categories>
-      <tags>
-        <tag>git</tag>
       </tags>
   </entry>
 </search>
