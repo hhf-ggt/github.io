@@ -898,6 +898,8 @@ Promise<span class="token punctuation">.</span>defer <span class="token operator
 <span class="token comment" spellcheck="true">// 由于原生的 Promise 是V8引擎提供的微任务，我们无法还原V8引擎的实现，所以这里使用 setTimeout 模拟异步，所以原生的是微任务，这里是宏任务。</span>
 <span class="token comment" spellcheck="true">// 这可以通过“宏任务”机制（例如setTimeout或setImmediate）或“微任务”机制（例如MutatonObserver或）来实现process.nextTick。</span>
 </code></pre>
+<h2 id="三、实现peomise-resolve"><a href="#三、实现peomise-resolve" class="headerlink" title="三、实现peomise.resolve()"></a>三、实现peomise.resolve()</h2><pre class=" language-js"><code class="language-js">
+</code></pre>
 
                 
             </div>
@@ -1275,30 +1277,29 @@ Promise<span class="token punctuation">.</span>defer <span class="token operator
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="far fa-dot-circle"></i>&nbsp;本篇
-            </div>
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/posts/8798f7a0/">
+                <a href="/posts/ca9ee217/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/19.jpg" class="responsive-img" alt="promise实现">
+                        <img src="/medias/featureimages/13.jpg" class="responsive-img" alt="async/await">
                         
-                        <span class="card-title">promise实现</span>
+                        <span class="card-title">async/await</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            手动实现一个promise
+                            async、await
                         
                     </div>
                     <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-12-14
-                            </span>
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2021-12-15
+                        </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -1311,7 +1312,6 @@ Promise<span class="token punctuation">.</span>defer <span class="token operator
                         </span>
                     </div>
                 </div>
-
                 
                 <div class="card-action article-tags">
                     
