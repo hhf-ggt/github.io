@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2021-12-15T16:37:52.151Z</updated>
+  <updated>2021-12-20T12:09:27.786Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -15,6 +15,218 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>interview-vue</title>
+    <link href="http://example.com/posts/ea7f6446/"/>
+    <id>http://example.com/posts/ea7f6446/</id>
+    <published>2021-12-20T11:57:39.000Z</published>
+    <updated>2021-12-20T12:09:27.786Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;1、spa与mpa的区别？各有什么优缺点&quot;&gt;&lt;a href=&quot;#1、spa与mpa的区别？各有什么优缺点&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="interview" scheme="http://example.com/categories/interview/"/>
+    
+    
+    <category term="vue" scheme="http://example.com/tags/vue/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>umi-js</title>
+    <link href="http://example.com/posts/ab2a40bc/"/>
+    <id>http://example.com/posts/ab2a40bc/</id>
+    <published>2021-12-20T02:20:48.000Z</published>
+    <updated>2021-12-20T05:09:45.652Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;一、umi-js框架&quot;&gt;&lt;a href=&quot;#一、umi-js框架&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="react" scheme="http://example.com/categories/react/"/>
+    
+    <category term="umi" scheme="http://example.com/categories/react/umi/"/>
+    
+    
+    <category term="react、js、框架" scheme="http://example.com/tags/react%E3%80%81js%E3%80%81%E6%A1%86%E6%9E%B6/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>前端路由</title>
+    <link href="http://example.com/posts/e439c1da/"/>
+    <id>http://example.com/posts/e439c1da/</id>
+    <published>2021-12-20T02:14:30.000Z</published>
+    <updated>2021-12-21T02:14:18.679Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;&lt;strong&gt;问题1、&lt;/strong&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;为什么history模式页面刷新后、就会404？&lt;br&gt;因为页面刷新、客户端会向服务点请求资源、当我们的url在服务端肯定没有对应的资源、所以服务端会返回404&lt;br&gt;hash路径改变浏览器</summary>
+        
+      
+    
+    
+    
+    <category term="javascript" scheme="http://example.com/categories/javascript/"/>
+    
+    <category term="h5history" scheme="http://example.com/categories/javascript/h5history/"/>
+    
+    
+    <category term="js router" scheme="http://example.com/tags/js-router/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>react-dva</title>
+    <link href="http://example.com/posts/51f2b629/"/>
+    <id>http://example.com/posts/51f2b629/</id>
+    <published>2021-12-17T02:50:11.000Z</published>
+    <updated>2021-12-20T03:38:33.557Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;安装create-react-app&quot;&gt;&lt;a href=&quot;#安装create-react-app&quot; class=&quot;headerlink&quot; title=&quot;安装create-react-app&quot;&gt;&lt;/a&gt;安装create-react-app&lt;/h1&gt;&lt;pre</summary>
+        
+      
+    
+    
+    
+    <category term="react" scheme="http://example.com/categories/react/"/>
+    
+    <category term="dva" scheme="http://example.com/categories/react/dva/"/>
+    
+    
+    <category term="react dva" scheme="http://example.com/tags/react-dva/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>dva.js</title>
+    <link href="http://example.com/posts/b362a1a7/"/>
+    <id>http://example.com/posts/b362a1a7/</id>
+    <published>2021-12-17T01:56:38.000Z</published>
+    <updated>2021-12-20T03:40:30.391Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;dva-js&quot;&gt;&lt;a href=&quot;#dva-js&quot; class=&quot;headerlink&quot; title=&quot;dva.js&quot;&gt;&lt;/a&gt;dva.js&lt;/h1&gt;&lt;pre&gt;&lt;code&gt;dva == react-router + fetch +</summary>
+        
+      
+    
+    
+    
+    <category term="react" scheme="http://example.com/categories/react/"/>
+    
+    <category term="dav.js" scheme="http://example.com/categories/react/dav-js/"/>
+    
+    
+    <category term="react redux dva" scheme="http://example.com/tags/react-redux-dva/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>promise-练习题</title>
+    <link href="http://example.com/posts/ec14336a/"/>
+    <id>http://example.com/posts/ec14336a/</id>
+    <published>2021-12-16T08:20:15.000Z</published>
+    <updated>2021-12-20T01:42:57.954Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;1&quot;&gt;&lt;a href=&quot;#1&quot; class=&quot;headerlink&quot; title=&quot;1&quot;&gt;&lt;/a&gt;1&lt;/h2&gt;&lt;pre class=&quot; language-js&quot;&gt;&lt;code class=&quot;language-js&quot;&gt;&lt;span class=&quot;token</summary>
+        
+      
+    
+    
+    
+    <category term="promise" scheme="http://example.com/categories/promise/"/>
+    
+    
+    <category term="promise" scheme="http://example.com/tags/promise/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>git reset &amp; git revert</title>
+    <link href="http://example.com/posts/ec099ee6/"/>
+    <id>http://example.com/posts/ec099ee6/</id>
+    <published>2021-12-16T02:47:12.000Z</published>
+    <updated>2021-12-20T03:40:57.604Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;我们经常会合并分支出错、这时候我们就想进行版本会退、那么我们有两种方式&quot;&gt;&lt;a href=&quot;#我们经常会合并分支出错、这时候我们就想进行版本会退、那么我们有两种方式&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="git" scheme="http://example.com/categories/git/"/>
+    
+    <category term="git-revert/git-reset" scheme="http://example.com/categories/git/git-revert-git-reset/"/>
+    
+    
+    <category term="git" scheme="http://example.com/tags/git/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>md</title>
+    <link href="http://example.com/posts/db55a254/"/>
+    <id>http://example.com/posts/db55a254/</id>
+    <published>2021-12-16T02:10:23.378Z</published>
+    <updated>2021-12-16T08:25:24.339Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;1、标题&quot;&gt;&lt;a href=&quot;#1、标题&quot; class=&quot;headerlink&quot; title=&quot;1、标题&quot;&gt;&lt;/a&gt;1、标题&lt;/h1&gt;&lt;h1 id=&quot;一级标题&quot;&gt;&lt;a href=&quot;#一级标题&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="工具" scheme="http://example.com/categories/%E5%B7%A5%E5%85%B7/"/>
+    
+    
+    <category term="md" scheme="http://example.com/tags/md/"/>
+    
+  </entry>
   
   <entry>
     <title>git合并分支</title>
@@ -47,7 +259,7 @@
     <link href="http://example.com/posts/ca9ee217/"/>
     <id>http://example.com/posts/ca9ee217/</id>
     <published>2021-12-15T15:24:56.000Z</published>
-    <updated>2021-12-15T15:54:47.565Z</updated>
+    <updated>2021-12-20T10:14:27.071Z</updated>
     
     
       
@@ -62,8 +274,10 @@
     
     <category term="javascript" scheme="http://example.com/categories/javascript/"/>
     
+    <category term="async/await" scheme="http://example.com/categories/javascript/async-await/"/>
     
-    <category term="js" scheme="http://example.com/tags/js/"/>
+    
+    <category term="async/await" scheme="http://example.com/tags/async-await/"/>
     
   </entry>
   
@@ -72,7 +286,7 @@
     <link href="http://example.com/posts/8798f7a0/"/>
     <id>http://example.com/posts/8798f7a0/</id>
     <published>2021-12-14T13:25:07.000Z</published>
-    <updated>2021-12-15T15:24:38.168Z</updated>
+    <updated>2021-12-21T01:47:46.584Z</updated>
     
     
       
@@ -87,10 +301,10 @@
     
     
     
-    <category term="javascript" scheme="http://example.com/categories/javascript/"/>
+    <category term="promise" scheme="http://example.com/categories/promise/"/>
     
     
-    <category term="js" scheme="http://example.com/tags/js/"/>
+    <category term="javascript" scheme="http://example.com/tags/javascript/"/>
     
   </entry>
   
@@ -99,7 +313,7 @@
     <link href="http://example.com/posts/99a94cc0/"/>
     <id>http://example.com/posts/99a94cc0/</id>
     <published>2021-12-14T13:20:22.000Z</published>
-    <updated>2021-12-14T13:25:28.119Z</updated>
+    <updated>2021-12-16T08:24:36.456Z</updated>
     
     
       
@@ -112,6 +326,8 @@
     
     
     
+    <category term="javascript" scheme="http://example.com/categories/javascript/"/>
+    
     
     <category term="js" scheme="http://example.com/tags/js/"/>
     
@@ -122,7 +338,7 @@
     <link href="http://example.com/posts/78cea6d8/"/>
     <id>http://example.com/posts/78cea6d8/</id>
     <published>2021-12-13T06:20:17.000Z</published>
-    <updated>2021-12-15T08:00:15.829Z</updated>
+    <updated>2021-12-20T03:40:14.239Z</updated>
     
     
       
@@ -138,6 +354,8 @@
     
     <category term="css" scheme="http://example.com/categories/css/"/>
     
+    <category term="1px" scheme="http://example.com/categories/css/1px/"/>
+    
     
     <category term="css" scheme="http://example.com/tags/css/"/>
     
@@ -148,7 +366,7 @@
     <link href="http://example.com/posts/1661a9ac/"/>
     <id>http://example.com/posts/1661a9ac/</id>
     <published>2021-12-07T11:49:04.000Z</published>
-    <updated>2021-12-15T08:00:39.498Z</updated>
+    <updated>2021-12-16T08:24:53.171Z</updated>
     
     
       
@@ -162,7 +380,7 @@
     
     
     
-    <category term="npm" scheme="http://example.com/categories/npm/"/>
+    <category term="工具" scheme="http://example.com/categories/%E5%B7%A5%E5%85%B7/"/>
     
     
     <category term="npm" scheme="http://example.com/tags/npm/"/>
