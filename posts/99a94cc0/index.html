@@ -5,7 +5,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="keywords" content="手撕相关, font end develop">
-    <meta name="description" content="一、常见手撕相关的问题总结">
+    <meta name="description" content="常见手写js">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -493,7 +493,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    12
+                    74
                 </div>
                 
 
@@ -515,7 +515,25 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="一、常见手撕相关的问题总结"><a href="#一、常见手撕相关的问题总结" class="headerlink" title="一、常见手撕相关的问题总结"></a>一、常见手撕相关的问题总结</h2>
+                <h2 id="一、常见手撕相关的问题总结"><a href="#一、常见手撕相关的问题总结" class="headerlink" title="一、常见手撕相关的问题总结"></a>一、常见手撕相关的问题总结</h2><h3 id="1、函数柯里化"><a href="#1、函数柯里化" class="headerlink" title="1、函数柯里化"></a>1、函数柯里化</h3><pre class=" language-js"><code class="language-js"><span class="token comment" spellcheck="true">// 编写一个函数、满足curry(1)(2)(3)(4) =  10</span>
+
+<span class="token keyword">function</span> add <span class="token punctuation">(</span>a<span class="token punctuation">,</span> b<span class="token punctuation">,</span> c<span class="token punctuation">,</span> d<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">return</span> a <span class="token operator">+</span> b <span class="token operator">+</span> c <span class="token operator">+</span> d
+<span class="token punctuation">}</span>
+
+<span class="token keyword">function</span> <span class="token function">curry</span><span class="token punctuation">(</span>fn<span class="token punctuation">,</span> <span class="token operator">...</span>args<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">return</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token operator">...</span>params<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">let</span> _args <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token operator">...</span>args<span class="token punctuation">,</span> <span class="token operator">...</span>params<span class="token punctuation">]</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>_args<span class="token punctuation">.</span>length <span class="token operator">>=</span> fn<span class="token punctuation">.</span>length<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token keyword">return</span> fn<span class="token punctuation">.</span><span class="token function">apply</span><span class="token punctuation">(</span><span class="token keyword">null</span><span class="token punctuation">,</span> _args<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+      <span class="token keyword">return</span> <span class="token function">curry</span><span class="token punctuation">(</span>fn<span class="token punctuation">,</span> <span class="token operator">...</span>_args<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">let</span> func <span class="token operator">=</span> <span class="token function">curry</span><span class="token punctuation">(</span>add<span class="token punctuation">)</span>
+</code></pre>
+<h3 id="2、"><a href="#2、" class="headerlink" title="2、"></a>2、</h3>
                 
             </div>
             <hr/>
@@ -1217,7 +1235,7 @@
         <div>
             Copyright&nbsp;&copy;
             <!-- 
-                <span id="year">2019-2021</span>
+                <span id="year">2019-2022</span>
              -->
             <a href="/about" target="_blank">huhu</a>
             |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>

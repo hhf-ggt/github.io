@@ -493,7 +493,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    182
+                    1k
                 </div>
                 
 
@@ -555,6 +555,81 @@
 </ul>
 </li>
 </ul>
+</li>
+</ul>
+<h2 id="2、v-if-和-v-for谁的优先级高、如何优化"><a href="#2、v-if-和-v-for谁的优先级高、如何优化" class="headerlink" title="2、v-if 和 v-for谁的优先级高、如何优化"></a>2、v-if 和 v-for谁的优先级高、如何优化</h2><ul>
+<li><p>v-for 的优先级比v-if的高、因为源码中genELement方法中先对静态节点进行获取后续时v-for在后面才是v-if</p>
+</li>
+<li><p>为什么不提倡一起使用呢？</p>
+<ul>
+<li>因为一起使用的时候v-for的优先级比v-if的优先级高、导致每次都要先循环完后才进行判断、比较浪费性能</li>
+</ul>
+</li>
+<li><p>如何解决？</p>
+<ul>
+<li>提前将需要渲染的数据使用computed就行过滤、过滤掉条件为假的条目、循环遍历只渲染需要渲染的条目</li>
+<li>还可以使用</li>
+</ul>
+</li>
+</ul>
+<h2 id="3、vue生命周期介绍"><a href="#3、vue生命周期介绍" class="headerlink" title="3、vue生命周期介绍"></a>3、vue生命周期介绍</h2><ul>
+<li><p>beforeCreate</p>
+<ul>
+<li>在new vue()之后的第一个生命周期钩子函数、此时data、methods、computed、watch上的数据、方法还未初始化、都不能被访问、在data observe之前被调用</li>
+</ul>
+</li>
+<li><p>created</p>
+<ul>
+<li>在实例创建完成之后第一个调用、此时已经能访问到data、但是此时还不能访问到$el、可以使用数据、改变数据、但是不会触发updataed</li>
+<li>无法与Dom进行交互，如果非要想，可以通过vm.$nextTick来访问Dom。</li>
+<li>异步数据的请求适合在 created 的钩子中使用，例如数据初始化。</li>
+</ul>
+</li>
+<li><p>beforeMount</p>
+<ul>
+<li>发生在挂载之前，在这之前 template 模板已导入渲染函数编译。此时虚拟Dom已经创建完成，即将开始渲染。在这一阶段也可以对数据进行更改，不会触发updated。</li>
+<li>执行到这个钩子的时候，在内存中已经编译好了模板了，但是还没有挂载到页面中，此时，页面还是旧的。</li>
+</ul>
+</li>
+<li><p>mounted</p>
+<ul>
+<li>在挂载完成后发生，此时真实的Dom挂载完毕，数据完成双向绑定，可以访问到Dom节点，使用$refs属性对Dom进行操作。</li>
+</ul>
+</li>
+<li><p>beforeUpdate</p>
+<ul>
+<li>发生在更新之前，也就是响应式数据发生更新，虚拟dom重新渲染之前被触发，你可以在当前阶段进行更改数据，不会造成重新渲染,但会再次触发当前钩子函数。</li>
+</ul>
+</li>
+<li><p>updated</p>
+<ul>
+<li>发生在更新完成之后，此时 Dom 已经更新。现在可以执行依赖于 DOM 的操作。然而在大多数情况下，你应该避免在此期间更改状态。如果要相应状态改变，最好使用计算属性或 watcher 取而代之。最好不要在此期间更改数据，因为这可能会导致无限循环的更新。</li>
+</ul>
+</li>
+<li><p>beforeDestroy</p>
+<ul>
+<li>发生在实例销毁之前，在这期间实例完全可以被使用，我们可以在这时进行善后收尾工作，比如清除计时器。</li>
+</ul>
+</li>
+<li><p>destroyed</p>
+<ul>
+<li>发生在实例销毁之后，这个时候只剩下了dom空壳。组件已被拆解，数据绑定被卸除，事件监听器被移除，所有子实例也统统被销毁。</li>
+</ul>
+</li>
+</ul>
+<h2 id="4、vue中的data为什么要是function而new-vue中可以是对象"><a href="#4、vue中的data为什么要是function而new-vue中可以是对象" class="headerlink" title="4、vue中的data为什么要是function而new vue中可以是对象"></a>4、vue中的data为什么要是function而new vue中可以是对象</h2><blockquote>
+<p>因为组件我们会复用、如果是对象的话没有作用域的隔离、会导致数据的混乱、但是new vue的时候 我们不会进行复用、所以对象也可以</p>
+</blockquote>
+<h2 id="5、vue中组件通信的方式"><a href="#5、vue中组件通信的方式" class="headerlink" title="5、vue中组件通信的方式"></a>5、vue中组件通信的方式</h2><ul>
+<li><p>props/$emit</p>
+</li>
+<li><p>$parent/$refs</p>
+</li>
+<li><p>vuex action muaction dispatch commit module</p>
+</li>
+<li><p>event/bus</p>
+</li>
+<li><p>privder/injection</p>
 </li>
 </ul>
 
@@ -934,48 +1009,46 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="far fa-dot-circle"></i>&nbsp;本篇
-            </div>
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/posts/ea7f6446/">
+                <a href="/posts/82b6dbcc/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/10.jpg" class="responsive-img" alt="interview-vue">
+                        <img src="/medias/featureimages/21.jpg" class="responsive-img" alt="box-size">
                         
-                        <span class="card-title">interview-vue</span>
+                        <span class="card-title">box-size</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            常见vue面试题总结
+                            css盒模型
                         
                     </div>
                     <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-12-20
-                            </span>
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2021-12-27
+                        </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/interview/" class="post-category">
-                                    interview
+                            <a href="/categories/css/" class="post-category">
+                                    css
                                 </a>
                             
                             
                         </span>
                     </div>
                 </div>
-
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/vue/">
-                        <span class="chip bg-color">vue</span>
+                    <a href="/tags/css/">
+                        <span class="chip bg-color">css</span>
                     </a>
                     
                 </div>
@@ -1261,7 +1334,7 @@
         <div>
             Copyright&nbsp;&copy;
             <!-- 
-                <span id="year">2019-2021</span>
+                <span id="year">2019-2022</span>
              -->
             <a href="/about" target="_blank">huhu</a>
             |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
